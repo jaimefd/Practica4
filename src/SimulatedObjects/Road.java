@@ -29,6 +29,10 @@ public class Road {
 		return longitud;
 	}
 	
+	public Junction getFin(){
+		return fin;
+	}
+	
 	public boolean getSemaforo(){
 		return semaforo;
 	}

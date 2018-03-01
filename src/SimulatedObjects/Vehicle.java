@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Vehicle {
 	private String id;
 	private int velMaxima, velActual, localizacion, distTotal, k, tiempoAveria;
-	private ArrayList<Junction> itinerario;
+	private ArrayList<Road> itinerario;
 	private boolean cruce, haLlegado;
 	
 	public Vehicle(int vmax, String it){
@@ -38,7 +38,7 @@ public class Vehicle {
 			if (localizacion >= itinerario.get(k).getLong()){
 				localizacion = itinerario.get(k).getLong();
 				if (!cruce){
-					itinerario.get(k).entraVehiculo(id);
+					itinerario.get(k).getFin().entraVehiculo(id);
 					++k;
 				}
 			}

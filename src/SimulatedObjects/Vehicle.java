@@ -1,6 +1,7 @@
 package SimulatedObjects;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Vehicle extends SimObject {
 	private int velMaxima, velActual, localizacion, distTotal, k, tiempoAveria;
@@ -24,6 +25,22 @@ public class Vehicle extends SimObject {
 	
 	public int getPos(){
 		return localizacion;
+	}
+	
+	protected String getReportHeader(){
+		return "vehicle_report";
+	}
+	
+	protected void fillReportDetails(Map<String, String> out){
+		String s;
+		if (!haLlegado) {
+			s = "(" + itinerario.get(k).getID() + ", " + localizacion + ")";
+		}
+		else s = "arrived";
+		out.put("speed", String.valueOf(velActual));
+		out.put("kilometrage", String.valueOf(distTotal));
+		out.put("faulty", String.valueOf(tiempoAveria));
+		out.put("location", s);
 	}
 	
 	public void avanza(){
@@ -56,7 +73,7 @@ public class Vehicle extends SimObject {
 		else velActual = v;
 	}
 	
-	public String generaInforme (){
+	public String generaInforme (int time){
 		String s = "[vehicle_report]\nid = " + id + "\ntime = " + time + "\nspeed = " + velActual;
 		s += "\nkilometrage = "+ distTotal + "\nfaulty = " + tiempoAveria + "\nlocation = ";
 		if (!haLlegado) {

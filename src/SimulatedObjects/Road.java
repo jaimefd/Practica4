@@ -2,6 +2,7 @@ package SimulatedObjects;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Road extends SimObject {
 	private int longitud, maxVel, velBase;
@@ -44,6 +45,18 @@ public class Road extends SimObject {
 		vehiculos.remove(v);
 	}
 	
+	protected String getReportHeader(){
+		return "road_report";
+	}
+	
+	protected void fillReportDetails(Map<String, String> out){
+		String s = "";
+		for (int i = 0; i < vehiculos.size(); ++i)
+			s += "(" + vehiculos.get(i).getID() + ", " + vehiculos.get(i).getPos() + "), ";
+		s = s.substring(0, s.length() - 2);
+		out.put("state", s);
+	}
+	
 	public void avanza (){ // vehiculos = new MTM ((a, b) -> a < b
 		velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
 		int factorRed = 1;
@@ -56,7 +69,7 @@ public class Road extends SimObject {
 		}
 	}
 
-	public String generaInforme (){
+	public String generaInforme (int time){
 		String s = "[road_report]\nid = " + id + "\ntime = " + time + "\nstate = ";
 		for (int i = 0; i < vehiculos.size(); ++i)
 			s += "(" + vehiculos.get(i).getID() + ", " + vehiculos.get(i).getPos() + "), ";

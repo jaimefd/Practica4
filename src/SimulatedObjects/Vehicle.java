@@ -2,8 +2,7 @@ package SimulatedObjects;
 
 import java.util.ArrayList;
 
-public class Vehicle {
-	private String id;
+public class Vehicle extends SimObject {
 	private int velMaxima, velActual, localizacion, distTotal, k, tiempoAveria;
 	private ArrayList<Road> itinerario;
 	private boolean cruce, haLlegado;
@@ -17,10 +16,6 @@ public class Vehicle {
 		k = 0;
 		tiempoAveria = 0;
 		haLlegado = false;
-	}
-	
-	public String getID(){
-		return id;
 	}
 	
 	public boolean getAveria(){

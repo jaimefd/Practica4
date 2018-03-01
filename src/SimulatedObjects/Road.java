@@ -3,8 +3,7 @@ package SimulatedObjects;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-public class Road {
-	private String id;
+public class Road extends SimObject {
 	private int longitud, maxVel, velBase;
 	private ArrayList<Vehicle> vehiculos;
 	private boolean semaforo;
@@ -19,10 +18,6 @@ public class Road {
 
 	public ArrayDeque<Vehicle> getQueue(){
 		return cola;
-	}
-	
-	public String getID(){
-		return id;
 	}
 	
 	public int getLong(){

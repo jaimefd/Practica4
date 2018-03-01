@@ -3,8 +3,7 @@ package SimulatedObjects;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-public class Junction { // Usar ArrayDeque
-	private String id;
+public class Junction extends SimObject { // Usar ArrayDeque
 	private int k, time;
 	private ArrayList<Road> carreteras;
 	

@@ -1,8 +1,8 @@
 package Events;
 
-public class NewRoadEvent {
+public class NewRoadEvent extends Event{
 
-	public NewJunctionEvent(int time, String id) {
-		
+	public NewRoadEvent(int time, String id, String sr, String dest, int max, int lenght) {
+		super(time);
 	}
 }

@@ -1,13 +1,10 @@
 package Events;
 
-import java.util.ArrayList;
-
-import SimulatedObjects.Vehicle;
-import Simulator.TrafficSimulator;
+import Simulator.RoadMap;
 
 public class VehicleFaultyEvent extends Event{
-	int duration;
-	String vehicles;
+	private int duration;
+	private String vehicles;
 
 	public VehicleFaultyEvent(int t, String vehicles, int duration) {
 		super(t);
@@ -15,7 +12,10 @@ public class VehicleFaultyEvent extends Event{
 		this.vehicles = vehicles;
 	}
 
-	public void execute(TrafficSimulator sim) {
-		
+	public void execute(RoadMap map) {
+		String[] vehiculos = vehicles.split(",");
+		for (String v : vehiculos)
+			map.getVehicle(v).setTiempoAveria(duration);
 	}
+	
 }

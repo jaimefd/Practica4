@@ -1,21 +1,22 @@
 package SimulatedObjects;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Vehicle extends SimObject {
 	private int velMaxima, velActual, localizacion, distTotal, k, tiempoAveria;
-	private ArrayList<Road> itinerario;
-	private boolean cruce, haLlegado;
+	private Road roadActual;
+	private List<Junction> itinerario;
+	private boolean haLlegado;
 	
-	public Vehicle(String ident, int vmax){
-		id = ident;
+	public Vehicle(String ident, int vmax, List<Junction> it){
+		super(ident);
 		velMaxima = vmax;
 		velActual = 0;
 		distTotal = 0;
 		localizacion = 0;
-		itinerario = new ArrayList<>();
-		k = 0;
+		itinerario = it;
+		k = 1;
 		tiempoAveria = 0;
 		haLlegado = false;
 	}
@@ -24,8 +25,20 @@ public class Vehicle extends SimObject {
 		return tiempoAveria > 0;
 	}
 	
+	public Road getRoad(){
+		return roadActual;
+	}
+	
 	public int getPos(){
 		return localizacion;
+	}
+	
+	public Road getCarretera(){
+		return roadActual;
+	}
+	
+	public Junction sigCruce() {
+		return itinerario.get(k);
 	}
 	
 	protected String getReportHeader(){
@@ -46,21 +59,22 @@ public class Vehicle extends SimObject {
 	
 	public void avanza(){
 		if (tiempoAveria > 0) --tiempoAveria;
-		else {
+		else if (!haLlegado){
 			localizacion += velActual;
-			if (localizacion >= itinerario.get(k).getLong()){
-				localizacion = itinerario.get(k).getLong();
-				if (!cruce){
-					itinerario.get(k).getFin().entraVehiculo(id);
+			distTotal += velActual;
+			if (localizacion >= roadActual.getLong()){
+				localizacion = roadActual.getLong();
+				distTotal += (roadActual.getLong() + localizacion);
+				if (k < itinerario.size()){
+					roadActual.entraVehiculo(this);
 					++k;
 				}
 			}
 		}
 	}
 	
-	public void moverASiguienteCarretera(){
-		k++;
-		distTotal += localizacion;
+	public void moverASiguienteCarretera(Road r){
+		roadActual = r;
 		localizacion = 0;
 		if (k == itinerario.size()) haLlegado = true;
 	}

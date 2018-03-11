@@ -1,28 +1,36 @@
 package SimulatedObjects;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Map;
+
+import es.ucm.fdi.util.MultiTreeMap;
 
 public class Road extends SimObject {
 	private int longitud, maxVel;
-	private ArrayList<Vehicle> vehiculos;
+	private MultiTreeMap<Integer, Vehicle> vehiculos;
 	private boolean semaforo;
 	private ArrayDeque<Vehicle> cola;
 	private Junction ini, fin;
 	
-	public Road(int l, int maxV, String junction_i, String junction_f){
+	public Road(String ident, int l, int maxV, Junction junction_i, Junction junction_f){
+		super(ident);
 		longitud = l;
 		maxVel = maxV;
-		vehiculos = new ArrayList<>();
+		ini = junction_i;
+		fin = junction_f;
+		vehiculos = new MultiTreeMap<>((a, b) -> a - b);
 	}
-
+	
 	public ArrayDeque<Vehicle> getQueue(){
 		return cola;
 	}
 	
 	public int getLong(){
 		return longitud;
+	}
+	
+	public Junction getIni(){
+		return ini;
 	}
 	
 	public Junction getFin(){
@@ -38,11 +46,11 @@ public class Road extends SimObject {
 	}
 	
 	public void entraVehiculo (Vehicle v){
-		vehiculos.add(v);
+		vehiculos.putValue(0, v);
 	}
 	
 	public void saleVehiculo (Vehicle v){
-		vehiculos.remove(v);
+		vehiculos.removeValue(longitud, v);
 	}
 	
 	protected String getReportHeader(){
@@ -51,30 +59,21 @@ public class Road extends SimObject {
 	
 	protected void fillReportDetails(Map<String, String> out){
 		String s = "";
-		for (int i = 0; i < vehiculos.size(); ++i)
-			s += "(" + vehiculos.get(i).getID() + ", " + vehiculos.get(i).getPos() + "), ";
+		for (Vehicle v : vehiculos.innerValues())
+			s += "(" + v.getID() + ", " + v.getPos() + "), ";
 		s = s.substring(0, s.length() - 2);
 		out.put("state", s);
 	}
 	
-	public void avanza (){ // vehiculos = new MTM ((a, b) -> a < b
+	public void avanza (){ // ***
 		int velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
 		int factorRed = 1;
-		for (int i = vehiculos.size() - 1; i >= 0; --i){
+		for (Vehicle v : vehiculos.innerValues()){
 			if (factorRed == 1){
-				if (vehiculos.get(i).getAveria()) factorRed = 2;
+				if (v.getAveria()) factorRed = 2;
 			}
-			vehiculos.get(i).setVelocidadActual(velBase / factorRed);
-			vehiculos.get(i).avanza();
+			v.setVelocidadActual(velBase / factorRed);
+			v.avanza();
 		}
-	}
-
-	public String generaInforme (int time){
-		String s = "[road_report]\nid = " + id + "\ntime = " + time + "\nstate = ";
-		for (int i = 0; i < vehiculos.size(); ++i)
-			s += "(" + vehiculos.get(i).getID() + ", " + vehiculos.get(i).getPos() + "), ";
-		s = s.substring(0, s.length() - 2);
-		s += "\n";
-		return s;
 	}
 }

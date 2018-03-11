@@ -5,6 +5,10 @@ import java.util.Map;
 public abstract class SimObject {
 	protected String id;
 	
+	public SimObject(String id) {
+		this.id = id;
+	}
+	
 	public String getID(){
 		return id;
 	}

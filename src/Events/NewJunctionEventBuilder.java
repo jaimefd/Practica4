@@ -12,8 +12,8 @@ public class NewJunctionEventBuilder implements EventBuilder {
 		return id.charAt(0) == 'j';
 	}
 	
-	public void parseInt(IniSection sec, String key, int de){
-		
+	public int parseInt(IniSection sec, String key){
+		return Integer.parseInt(sec.getValue(key));
 	}
 	
 	public void parseIdList(IniSection sec, String key){

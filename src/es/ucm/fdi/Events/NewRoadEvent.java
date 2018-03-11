@@ -1,8 +1,8 @@
-package Events;
+package es.ucm.fdi.Events;
 
-import SimulatedObjects.Junction;
-import SimulatedObjects.Road;
-import Simulator.RoadMap;
+import es.ucm.fdi.SimulatedObjects.Junction;
+import es.ucm.fdi.SimulatedObjects.Road;
+import es.ucm.fdi.Simulator.RoadMap;
 
 public class NewRoadEvent extends Event{
 	private String id, sr, dest;

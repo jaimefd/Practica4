@@ -1,6 +1,6 @@
-package Events;
+package es.ucm.fdi.Events;
 
-import Simulator.RoadMap;
+import es.ucm.fdi.Simulator.RoadMap;
 
 public class VehicleFaultyEvent extends Event{
 	private int duration;

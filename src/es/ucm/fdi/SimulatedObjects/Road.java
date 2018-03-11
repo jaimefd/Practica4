@@ -1,4 +1,4 @@
-package SimulatedObjects;
+package es.ucm.fdi.SimulatedObjects;
 
 import java.util.ArrayDeque;
 import java.util.Map;

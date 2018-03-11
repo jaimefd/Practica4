@@ -1,11 +1,11 @@
-package SimulatedObjects;
+package es.ucm.fdi.SimulatedObjects;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Junction extends SimObject { // Usar ArrayDeque
+public class Junction extends SimObject {
 	private int k; //***
 	private List<Road> entrantes;
 	private List<Road> salientes;

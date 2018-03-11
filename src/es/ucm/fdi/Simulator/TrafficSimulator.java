@@ -1,9 +1,11 @@
+package es.ucm.fdi.Simulator;
+
 import java.io.OutputStream;
 import java.util.List;
 
-import Events.Event;
-import SimulatedObjects.Junction;
-import SimulatedObjects.Road;
+import es.ucm.fdi.Events.Event;
+import es.ucm.fdi.SimulatedObjects.Junction;
+import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.util.MultiTreeMap;
 
 public class TrafficSimulator {

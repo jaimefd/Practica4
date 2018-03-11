@@ -1,14 +1,14 @@
-package Simulator;
+package es.ucm.fdi.Simulator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import SimulatedObjects.Junction;
-import SimulatedObjects.Road;
-import SimulatedObjects.SimObject;
-import SimulatedObjects.Vehicle;
+import es.ucm.fdi.SimulatedObjects.Junction;
+import es.ucm.fdi.SimulatedObjects.Road;
+import es.ucm.fdi.SimulatedObjects.SimObject;
+import es.ucm.fdi.SimulatedObjects.Vehicle;
 
 public class RoadMap {
 

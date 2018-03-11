@@ -8,7 +8,8 @@ public class Vehicle extends SimObject {
 	private ArrayList<Road> itinerario;
 	private boolean cruce, haLlegado;
 	
-	public Vehicle(int vmax, String it){
+	public Vehicle(String ident, int vmax){
+		id = ident;
 		velMaxima = vmax;
 		velActual = 0;
 		distTotal = 0;

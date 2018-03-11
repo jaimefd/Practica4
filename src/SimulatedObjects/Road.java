@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Road extends SimObject {
-	private int longitud, maxVel, velBase;
+	private int longitud, maxVel;
 	private ArrayList<Vehicle> vehiculos;
 	private boolean semaforo;
 	private ArrayDeque<Vehicle> cola;
 	private Junction ini, fin;
 	
-	public Road(int l, int maxV){
+	public Road(int l, int maxV, String junction_i, String junction_f){
 		longitud = l;
 		maxVel = maxV;
 		vehiculos = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Road extends SimObject {
 	}
 	
 	public void avanza (){ // vehiculos = new MTM ((a, b) -> a < b
-		velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
+		int velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
 		int factorRed = 1;
 		for (int i = vehiculos.size() - 1; i >= 0; --i){
 			if (factorRed == 1){

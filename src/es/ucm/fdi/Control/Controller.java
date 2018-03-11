@@ -1,6 +1,6 @@
-package Control;
+package es.ucm.fdi.Control;
 
-import Events.Event;
+import es.ucm.fdi.Events.Event;
 import es.ucm.fdi.ini.IniSection;
 
 public class Controller {

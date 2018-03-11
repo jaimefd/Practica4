@@ -1,4 +1,4 @@
-package SimulatedObjects;
+package es.ucm.fdi.SimulatedObjects;
 
 import java.util.List;
 import java.util.Map;

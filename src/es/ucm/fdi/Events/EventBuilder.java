@@ -1,4 +1,4 @@
-package Events;
+package es.ucm.fdi.Events;
 
 import es.ucm.fdi.ini.IniSection;
 

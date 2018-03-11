@@ -1,11 +1,11 @@
-package Events;
+package es.ucm.fdi.Events;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import SimulatedObjects.Junction;
-import SimulatedObjects.Vehicle;
-import Simulator.RoadMap;
+import es.ucm.fdi.SimulatedObjects.Junction;
+import es.ucm.fdi.SimulatedObjects.Vehicle;
+import es.ucm.fdi.Simulator.RoadMap;
 
 public class NewVehicleEvent extends Event{
 	private String id, cruces;

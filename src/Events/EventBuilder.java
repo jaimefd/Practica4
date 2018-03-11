@@ -2,9 +2,9 @@ package Events;
 
 import es.ucm.fdi.ini.IniSection;
 
-public abstract class EventBuilder {
-	public void parse();
+public interface EventBuilder {
+	public Event parse(IniSection sec);
 	public boolean isValidId(String id);
-	public void parseInt(IniSection sec, String key, int default);
+	public int parseInt(IniSection sec, String key);
 	public void parseIdList(IniSection sec, String key);
 }

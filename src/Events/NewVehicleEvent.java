@@ -1,19 +1,32 @@
 package Events;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import SimulatedObjects.Junction;
 import SimulatedObjects.Vehicle;
-import Simulator.TrafficSimulator;
+import Simulator.RoadMap;
 
 public class NewVehicleEvent extends Event{
-	int max;
-	String id;
+	private String id, cruces;
+	private int max;
 	
-	public NewVehicleEvent(int time, String id, int max, String junction) {
+	public NewVehicleEvent(int time, String id, int max, String cruces) {
 		super(time);
-		this.max = max;
 		this.id = id;
+		this.max = max;
+		this.cruces = cruces;
 	}
 	
-	public void execute(TrafficSimulator sim) {
-		sim.map.add(new Vehicle(id, max));
+	public void execute(RoadMap map) {
+		
+		List<Junction> itinerario = new ArrayList<>();
+		String[] s = cruces.split(",");
+		for (String n : s)
+			itinerario.add(map.getJunction(n));
+		Vehicle v = new Vehicle(id, max, itinerario);
+		v.avanza();
+		map.addVehicle(v);
+		
 	}
 }

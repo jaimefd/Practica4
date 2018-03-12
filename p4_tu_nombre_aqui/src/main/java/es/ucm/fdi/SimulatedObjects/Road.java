@@ -68,12 +68,19 @@ public class Road extends SimObject {
 	public void avanza (){ // ***
 		int velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
 		int factorRed = 1;
-		for (Vehicle v : vehiculos.innerValues()){
-			if (factorRed == 1){
-				if (v.getAveria()) factorRed = 2;
+		MultiTreeMap<Integer, Vehicle> map = new MultiTreeMap<>((a, b) -> a - b);
+		for (int i = longitud - 1; i >= 0; --i){
+			if (vehiculos.containsKey(i)){
+				for(Vehicle v: vehiculos.get(i)){
+					if (factorRed == 1){
+						if (v.getAveria()) factorRed = 2;
+					}
+					v.setVelocidadActual(velBase / factorRed);
+					v.avanza();
+					map.putValue(v.getPos(), v);
+				}
 			}
-			v.setVelocidadActual(velBase / factorRed);
-			v.avanza();
 		}
+		vehiculos = map;
 	}
 }

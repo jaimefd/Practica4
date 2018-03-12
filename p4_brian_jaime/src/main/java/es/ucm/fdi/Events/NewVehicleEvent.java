@@ -8,8 +8,8 @@ import es.ucm.fdi.SimulatedObjects.Vehicle;
 import es.ucm.fdi.Simulator.RoadMap;
 
 public class NewVehicleEvent extends Event{
-	private String id, cruces;
-	private int max;
+	protected String id, cruces;
+	protected int max;
 	
 	public NewVehicleEvent(int time, String id, int max, String cruces) {
 		super(time);

@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Vehicle extends SimObject {
-	private int velMaxima, velActual, localizacion, distTotal, k, tiempoAveria;
+	protected int velMaxima, velActual, distTotal;
+	private int localizacion, k, tiempoAveria;
 	private Road roadActual;
 	private List<Junction> itinerario;
 	private boolean haLlegado;

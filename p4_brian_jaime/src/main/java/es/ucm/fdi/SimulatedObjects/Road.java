@@ -6,8 +6,8 @@ import java.util.Map;
 import es.ucm.fdi.util.MultiTreeMap;
 
 public class Road extends SimObject {
-	private int longitud, maxVel;
-	private MultiTreeMap<Integer, Vehicle> vehiculos;
+	protected int longitud, maxVel;
+	protected MultiTreeMap<Integer, Vehicle> vehiculos;
 	private boolean semaforo;
 	private ArrayDeque<Vehicle> cola;
 	private Junction ini, fin;

@@ -156,12 +156,9 @@ public class ExampleMain {
 		if(_outFile != null) out = new FileOutputStream(_outFile);
 		else out = System.out;
 		if(_timeLimit == null) _timeLimit = _timeLimitDefaultValue;
-		File file = new File(_inFile);
-		InputStream in = new FileInputStream(file);
-		Ini ini = new Ini(in);
-		TrafficSimulator tf = new TrafficSimulator();
-		Controller c = new Controller(new FileInputStream(_inFile), out, _timeLimit);
-		c.run();
+		InputStream in = new FileInputStream(_inFile)
+		Controller c = new Controller(new Ini(in), out, _timeLimit);
+		c.execute(new TrafficSimulator());
 	}
 
 	private static void start(String[] args) throws IOException {

@@ -156,7 +156,7 @@ public class ExampleMain {
 		if(_outFile != null) out = new FileOutputStream(_outFile);
 		else out = System.out;
 		if(_timeLimit == null) _timeLimit = _timeLimitDefaultValue;
-		InputStream in = new FileInputStream(_inFile)
+		InputStream in = new FileInputStream(_inFile);
 		Controller c = new Controller(new Ini(in), out, _timeLimit);
 		c.execute(new TrafficSimulator());
 	}

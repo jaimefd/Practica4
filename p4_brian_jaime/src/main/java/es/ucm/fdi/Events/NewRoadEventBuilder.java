@@ -14,6 +14,10 @@ public class NewRoadEventBuilder implements EventBuilder {
 		return id.charAt(0) == 'r';
 	}
 	
+	public String type(){
+		return "new_road";
+	}
+	
 	public int parseInt(IniSection sec, String key){
 		return Integer.parseInt(sec.getValue(key));
 	}

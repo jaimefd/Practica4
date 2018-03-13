@@ -13,7 +13,7 @@ public class NewCarEvent extends NewVehicleEvent{
 	private int resistance, fault_probability, max_fault_duration;
 	private long seed;
 
-	public NewCarEvent(int time, String id, int max, String cruces, int resistance, int fault_probability, int max_fault_duration, long seed) {
+	public NewCarEvent(int time, String id, int max, String[] cruces, int resistance, int fault_probability, int max_fault_duration, long seed) {
 		super(time, id, max, cruces);
 		this.resistance = resistance;
 		this.fault_probability = fault_probability;
@@ -24,8 +24,7 @@ public class NewCarEvent extends NewVehicleEvent{
 	public void execute(RoadMap map) {
 		
 		List<Junction> itinerario = new ArrayList<>();
-		String[] s = cruces.split(",");
-		for (String n : s)
+		for (String n : cruces)
 			itinerario.add(map.getJunction(n));
 		Vehicle v = new Car(id, max, itinerario, resistance, fault_probability, max_fault_duration, seed);
 		v.avanza();

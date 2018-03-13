@@ -7,7 +7,7 @@ public class VehicleFaultyEventBuilder implements EventBuilder {
 	public Event parse(IniSection sec) {
 		if (!sec.getTag().equals("make_vehicle_faulty")) return null;
 		return new VehicleFaultyEvent(Integer.parseInt(sec.getValue("time")),
-				sec.getValue("vehicles"), parseInt(sec, "duration"));
+				parseIdList(sec, "vehicles"), parseInt(sec, "duration"));
 	}
 
 	public boolean isValidId(String id){
@@ -22,9 +22,9 @@ public class VehicleFaultyEventBuilder implements EventBuilder {
 		return Integer.parseInt(sec.getValue(key));
 	}
 
-	public void parseIdList(IniSection sec, String key) {
-		// TODO Auto-generated method stub
-		
+	public String[] parseIdList(IniSection sec, String key){
+		String[] s = sec.getValue(key).split(",");
+		return s;
 	}
 
 }

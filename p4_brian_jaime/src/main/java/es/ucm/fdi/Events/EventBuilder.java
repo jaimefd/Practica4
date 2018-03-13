@@ -7,5 +7,5 @@ public interface EventBuilder {
 	public boolean isValidId(String id);
 	public String type();
 	public int parseInt(IniSection sec, String key);
-	public void parseIdList(IniSection sec, String key);
+	public String[] parseIdList(IniSection sec, String key);
 }

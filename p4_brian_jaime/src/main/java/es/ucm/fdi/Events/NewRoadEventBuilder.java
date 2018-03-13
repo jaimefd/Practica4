@@ -22,7 +22,8 @@ public class NewRoadEventBuilder implements EventBuilder {
 		return Integer.parseInt(sec.getValue(key));
 	}
 	
-	public void parseIdList(IniSection sec, String key){
-		
+	public String[] parseIdList(IniSection sec, String key){
+		String[] s = sec.getValue(key).split(",");
+		return s;
 	}
 }

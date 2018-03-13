@@ -6,7 +6,7 @@ public class NewVehicleEventBuilder implements EventBuilder{
 	public Event parse(IniSection sec) {
 		if (!sec.getTag().equals("new_vehicle")) return null;
 		return new NewVehicleEvent(parseInt(sec, "time"), sec.getValue("id"),
-				parseInt(sec, "max_speed"), sec.getValue("itinerary"));
+				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"));
 	}
 	
 	public boolean isValidId(String id){
@@ -21,7 +21,8 @@ public class NewVehicleEventBuilder implements EventBuilder{
 		return Integer.parseInt(sec.getValue(key));
 	}
 	
-	public void parseIdList(IniSection sec, String key){
-		
+	public String[] parseIdList(IniSection sec, String key){
+		String[] s = sec.getValue(key).split(",");
+		return s;
 	}
 }

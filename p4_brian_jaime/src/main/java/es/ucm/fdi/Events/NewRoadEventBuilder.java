@@ -2,7 +2,18 @@ package es.ucm.fdi.Events;
 
 import es.ucm.fdi.ini.IniSection;
 
+/** 
+ * La clase NewRoadEventBuilder se encarga de crear el NewRoadEvent
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class NewRoadEventBuilder implements EventBuilder {
+	
+	/** 
+	 * Método para reconocer si la sección representa un evento new road y crear el evento
+	 * @param sec La sección del evento
+	*/
+	
 	public Event parse(IniSection sec) {
 		if (!sec.getTag().equals("new_road")) return null;
 		return new NewRoadEvent(parseInt(sec, "time"), sec.getValue("id"), 
@@ -10,17 +21,40 @@ public class NewRoadEventBuilder implements EventBuilder {
 				parseInt(sec, "max_speed"), parseInt(sec, "length"));
 	}
 	
+	/** 
+	 * Método para comprobar si la id representa una road.
+	 * @param id El identificador del objeto
+	*/
+	
 	public boolean isValidId(String id){
 		return id.charAt(0) == 'r';
 	}
+	
+	/** 
+	 * Método que devuelve el tipo de evento que construye la clase.
+	*/
 	
 	public String type(){
 		return "new_road";
 	}
 	
+	/** 
+	 * Método que convierte una key de una sección en un entero
+	 * @param sec La sección.
+	 * @param key La clave que va a ser convertida en entero.
+	 * @return El entero obtenido a partir de la key.
+	*/
+	
 	public int parseInt(IniSection sec, String key){
 		return Integer.parseInt(sec.getValue(key));
 	}
+	
+	/** 
+	 * Método que convierte una key de una sección en un array de strings.
+	 * @param sec La sección.
+	 * @param key La clave que va a ser convertida en entero.
+	 * @return El array de strings.
+	*/
 	
 	public String[] parseIdList(IniSection sec, String key){
 		String[] s = sec.getValue(key).split(",");

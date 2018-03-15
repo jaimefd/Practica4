@@ -75,6 +75,7 @@ public class Vehicle extends SimObject {
 	}
 	
 	public void moverASiguienteCarretera(Road r){
+		if (k > 1) roadActual.saleVehiculo(this);
 		roadActual = r;
 		localizacion = 0;
 		velActual = 0;

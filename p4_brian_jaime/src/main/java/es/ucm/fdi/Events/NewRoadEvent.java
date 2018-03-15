@@ -4,9 +4,24 @@ import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.Simulator.RoadMap;
 
+/** 
+ * La clase NewRoadEvent se encarga de crear una carretera
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class NewRoadEvent extends Event{
 	private String id, sr, dest;
 	private int max, length;
+	
+	/** 
+	 * Constructor de la clase NewRoadEvent
+	 * @param time Entero que representa el momento en el que ocurrirá el evento.
+	 * @param id String con el identificador de la carretera
+	 * @param sr String con el identificador del cruce inicial
+	 * @param dest String con el identificador del cruce final
+	 * @param max Entero con la velocidad máxima permitida en la carretera
+	 * @param length Entero con la longitud de la carretera
+	*/
 
 	public NewRoadEvent(int time, String id, String sr, String dest, int max, int length) {
 		super(time);
@@ -16,6 +31,11 @@ public class NewRoadEvent extends Event{
 		this.max = max;
 		this.length = length;
 	}
+	
+	/** 
+	 * Método que ejecuta el evento de creación de una nueva carretera
+	 * @param map El mapa de carreteras e intersecciones.
+	*/
 
 	public void execute(RoadMap map) {
 		Junction ini = map.getJunction(sr);

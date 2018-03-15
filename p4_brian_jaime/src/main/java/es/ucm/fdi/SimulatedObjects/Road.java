@@ -61,18 +61,26 @@ public class Road extends SimObject {
 	protected void fillReportDetails(Map<String, String> out){
 		String s = "";
 		if (!vehiculos.isEmpty()) {
-			for (Vehicle v : vehiculos.innerValues())
-				s += "(" + v.getID() + "," + v.getPos() + "),";
+			for (int i = longitud; i >= 0; --i){
+				if (vehiculos.containsKey(i)){
+					for(Vehicle v: vehiculos.get(i))
+						s += "(" + v.getID() + "," + v.getPos() + "),";
+				}
+			}
 			s = s.substring(0, s.length() - 1);
 		}
 		out.put("state", s);
 	}
 	
 	public void avanza (){ // ***
-		int velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
-		System.out.println(Math.max(vehiculos.size(), 1));
+		int velBase = Math.min(maxVel, maxVel / Math.max((int) vehiculos.sizeOfValues(), 1) + 1);
 		int factorRed = 1;
 		MultiTreeMap<Integer, Vehicle> map = new MultiTreeMap<>((a, b) -> a - b);
+		if (vehiculos.containsKey(longitud)){
+			for(Vehicle v: vehiculos.get(longitud)){
+				map.putValue(longitud, v);
+			}
+		}
 		for (int i = longitud - 1; i >= 0; --i){
 			if (vehiculos.containsKey(i)){
 				for(Vehicle v: vehiculos.get(i)){
@@ -82,11 +90,11 @@ public class Road extends SimObject {
 					}
 					else v.setVelocidadActual(velBase / factorRed);
 					v.avanza();
-					if (v.getPos() < longitud) map.putValue(v.getPos(), v);
-					else {
-						saleVehiculo(v);
+					if (v.getPos() == longitud) {
+						v.setVelocidadActual(0);
 						cola.add(v);
 					}
+					map.putValue(v.getPos(), v);
 				}
 			}
 		}

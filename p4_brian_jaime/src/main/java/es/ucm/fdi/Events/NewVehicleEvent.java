@@ -44,7 +44,6 @@ public class NewVehicleEvent extends Event{
 			itinerario.add(map.getJunction(n));
 		Vehicle v = new Vehicle(id, max, itinerario);
 		v.moverASiguienteCarretera(itinerario.get(0).road(v));
-		v.avanza();
 		map.addVehicle(v);
 		
 	}

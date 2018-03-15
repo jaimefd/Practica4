@@ -61,6 +61,6 @@ public abstract class SimObject {
 		m.put("id", id);
 		m.put("time", String.valueOf(time));
 		fillReportDetails(m);
-		}
+	}
 
 }

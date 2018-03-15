@@ -1,5 +1,6 @@
 package es.ucm.fdi.Control;
 
+import java.io.IOException;
 import java.io.OutputStream;
 
 import es.ucm.fdi.Events.EventBuilder;
@@ -26,7 +27,7 @@ public class Controller {
 		this.timeLimit = timeLimit;
 	}
 	
-	public void execute(TrafficSimulator sim) {
+	public void execute(TrafficSimulator sim) throws IOException {
 
 		for (IniSection n : ini.getSections()) {
 			boolean b = false;

@@ -1,11 +1,17 @@
 package es.ucm.fdi.Simulator;
 
+import java.io.IOException;
 import java.io.OutputStream;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.ucm.fdi.Events.Event;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
+import es.ucm.fdi.SimulatedObjects.SimObject;
+import es.ucm.fdi.ini.Ini;
+import es.ucm.fdi.ini.IniSection;
 import es.ucm.fdi.util.MultiTreeMap;
 
 public class TrafficSimulator {
@@ -25,7 +31,22 @@ public class TrafficSimulator {
 		eventos.putValue(e.getTime(), e);
 	}
 	
-	public void execute(int pasosSimulacion, OutputStream o){
+	public Ini report() {
+		Map<String, String> m = new LinkedHashMap<>();
+		Ini salida = new Ini();
+		for (SimObject sim : SimObjects.getSimObjects()) {
+			sim.report(contadorTiempo, m);
+			IniSection s = new IniSection(m.get(""));
+			for (String key: m.keySet()) {
+				if (key != "") s.setValue(key, m.get(key));
+			}
+			salida.addsection(s);
+			m.clear();
+		}
+		return salida;
+	}
+	
+	public void execute(int pasosSimulacion, OutputStream o) throws IOException{
 		int limiteTiempo = this.contadorTiempo + pasosSimulacion - 1;
 		while (this.contadorTiempo <= limiteTiempo) {
 			List<Event> eventActuales = eventos.get(contadorTiempo);
@@ -38,7 +59,7 @@ public class TrafficSimulator {
 			for (Junction j : SimObjects.getJunctions())
 				j.avanza();
 			this.contadorTiempo++;
-		// 5. esciribir un informe en OutputStream en caso de que no sea null
+			report().store(o);
 		}
 	}
 

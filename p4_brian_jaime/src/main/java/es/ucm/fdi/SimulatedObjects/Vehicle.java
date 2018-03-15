@@ -15,7 +15,6 @@ public class Vehicle extends SimObject {
 		velMaxima = vmax;
 		velActual = 0;
 		distTotal = 0;
-		localizacion = 0;
 		itinerario = it;
 		k = 1;
 		tiempoAveria = 0;
@@ -24,6 +23,10 @@ public class Vehicle extends SimObject {
 	
 	public boolean getAveria(){
 		return tiempoAveria > 0;
+	}
+	
+	public boolean fin(){
+		return k == itinerario.size();
 	}
 	
 	public Road getRoad(){
@@ -49,7 +52,7 @@ public class Vehicle extends SimObject {
 	protected void fillReportDetails(Map<String, String> out){
 		String s;
 		if (!haLlegado) {
-			s = "(" + itinerario.get(k).getID() + ", " + localizacion + ")";
+			s = "(" + roadActual.getID() + "," + localizacion + ")";
 		}
 		else s = "arrived";
 		out.put("speed", String.valueOf(velActual));
@@ -64,12 +67,9 @@ public class Vehicle extends SimObject {
 			localizacion += velActual;
 			distTotal += velActual;
 			if (localizacion >= roadActual.getLong()){
+				distTotal -= (localizacion - roadActual.getLong());
 				localizacion = roadActual.getLong();
-				distTotal += (roadActual.getLong() + localizacion);
-				if (k < itinerario.size()){
-					roadActual.entraVehiculo(this);
-					++k;
-				}
+				++k;
 			}
 		}
 	}
@@ -77,7 +77,9 @@ public class Vehicle extends SimObject {
 	public void moverASiguienteCarretera(Road r){
 		roadActual = r;
 		localizacion = 0;
+		velActual = 0;
 		if (k == itinerario.size()) haLlegado = true;
+		else roadActual.entraVehiculo(this);
 	}
 	
 	public void setTiempoAveria(int n) {
@@ -89,13 +91,4 @@ public class Vehicle extends SimObject {
 		else velActual = v;
 	}
 	
-	public String generaInforme (int time){
-		String s = "[vehicle_report]\nid = " + id + "\ntime = " + time + "\nspeed = " + velActual;
-		s += "\nkilometrage = "+ distTotal + "\nfaulty = " + tiempoAveria + "\nlocation = ";
-		if (!haLlegado) {
-			s += "(" + itinerario.get(k).getID() + ", " + localizacion + ")\n";
-		}
-		else s += "arrived\n";
-		return s;
-	}
 }

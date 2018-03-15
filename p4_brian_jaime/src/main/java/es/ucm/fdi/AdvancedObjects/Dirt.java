@@ -27,6 +27,11 @@ public class Dirt extends Road{
 		super(ident, l, maxV, junction_i, junction_f);
 	}
 	
+	/**
+	 * Rellena el informe de Dirt
+	 * @param out : Mapa con los datos de Dirt
+	 */
+	
 	protected void fillReportDetails(Map<String, String> out){
 		out.put("type", "dirt");
 		super.fillReportDetails(out);

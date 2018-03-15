@@ -31,6 +31,11 @@ public class Lane extends Road{
 		numCarriles = lanes;
 	}
 	
+	/**
+	 * Rellena el informe de Lane
+	 * @param out : Mapa con los datos de Lane
+	 */
+	
 	protected void fillReportDetails(Map<String, String> out){
 		out.put("type", "lanes");
 		super.fillReportDetails(out);

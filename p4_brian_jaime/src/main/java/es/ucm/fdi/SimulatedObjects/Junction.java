@@ -21,7 +21,7 @@ public class Junction extends SimObject {
 	*/
 	public Junction(String ident){
 		super(ident);
-		k = 0;
+		k = -1;
 		entrantes = new ArrayList<>();
 		salientes = new ArrayList<>();
 		mapSaliente = new HashMap<>();
@@ -74,7 +74,7 @@ public class Junction extends SimObject {
 			for (int i = 0; i < entrantes.size(); ++i){
 				s += "(" + entrantes.get(i).getID() + ",";
 				if (entrantes.get(i).getSemaforo()) s += "green,[";
-				else s += "red, [";
+				else s += "red,[";
 				if (!entrantes.get(i).getQueue().isEmpty()) {
 					for (Vehicle v : entrantes.get(i).getQueue())
 						s += v.getID() + ",";
@@ -90,14 +90,19 @@ public class Junction extends SimObject {
 	 * Método avanza para Junction.
 	*/
 	public void avanza(){
-		if (!entrantes.isEmpty() && !entrantes.get(k).getQueue().isEmpty()) {
-			Vehicle v = entrantes.get(k).getQueue().getFirst();
-			if (!v.fin()) {
-				Road r = mapSaliente.get(v.sigCruce());
-				v.moverASiguienteCarretera(r);
+		if (k == -1) {
+			k = 0;
+		}
+		else if (!entrantes.isEmpty()) {
+			if (!entrantes.get(k).getQueue().isEmpty()) {
+				Vehicle v = entrantes.get(k).getQueue().getFirst();
+				if (!v.fin()) {
+					Road r = mapSaliente.get(v.sigCruce());
+					v.moverASiguienteCarretera(r);
+				}
+				else v.moverASiguienteCarretera(null);
+				entrantes.get(k).getQueue().pop();
 			}
-			else v.moverASiguienteCarretera(null);
-			entrantes.get(k).getQueue().pop();
 			entrantes.get(k).setSemaforo(false);
 			k++;
 			if (k == entrantes.size()) k = 0;

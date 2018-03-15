@@ -1,6 +1,7 @@
 package es.ucm.fdi.AdvancedObjects;
 
 import java.util.List;
+import java.util.Map;
 
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
@@ -21,6 +22,15 @@ public class Bike extends Vehicle{
 
 	public Bike(String ident, int vmax, List<Junction> it) {
 		super(ident, vmax, it);
+	}
+	
+	/**
+	 * Informe de Bike
+	 * @param out : Mapa con los datos de Bike
+	 */
+	protected void fillReportDetails(Map<String, String> out){
+		out.put("type", "bike");
+		super.fillReportDetails(out);
 	}
 	
 	/**

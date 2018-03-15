@@ -29,10 +29,6 @@ public class Vehicle extends SimObject {
 		return k == itinerario.size();
 	}
 	
-	public Road getRoad(){
-		return roadActual;
-	}
-	
 	public int getPos(){
 		return localizacion;
 	}

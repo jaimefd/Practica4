@@ -32,7 +32,7 @@ public class Junction extends SimObject {
 	*/
 	public void entraVehiculo(Vehicle v){
 		for (Road r : entrantes)
-			if (r == v.getRoad()) r.getQueue().add(v);
+			if (r == v.getCarretera()) r.getQueue().add(v);
 	}
 	/** 
 	 * Devuelve la carretera en la que se encuentra un vehículo.

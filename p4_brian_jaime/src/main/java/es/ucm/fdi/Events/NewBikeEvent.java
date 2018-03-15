@@ -38,6 +38,7 @@ public class NewBikeEvent extends NewVehicleEvent{
 		for (String n : cruces)
 			itinerario.add(map.getJunction(n));
 		Vehicle v = new Bike(id, max, itinerario);
+		v.moverASiguienteCarretera(itinerario.get(0).road(v));
 		map.addVehicle(v);
 	}
 

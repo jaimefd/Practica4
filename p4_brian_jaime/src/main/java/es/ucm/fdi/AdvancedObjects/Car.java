@@ -1,6 +1,7 @@
 package es.ucm.fdi.AdvancedObjects;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import es.ucm.fdi.SimulatedObjects.Junction;
@@ -35,6 +36,15 @@ public class Car extends Vehicle{
 		probabilidadDeAveria = fault_probability;
 		duracionMaximaAveria = max_fault_duration;
 		numAleatorio = new Random(semilla);
+	}
+	
+	/**
+	 * Informe de Car
+	 * @param out : Mapa con los datos de Car
+	 */
+	protected void fillReportDetails(Map<String, String> out){
+		out.put("type", "car");
+		super.fillReportDetails(out);
 	}
 	
 	/**

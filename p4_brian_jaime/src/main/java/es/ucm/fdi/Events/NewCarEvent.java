@@ -50,6 +50,7 @@ public class NewCarEvent extends NewVehicleEvent{
 		for (String n : cruces)
 			itinerario.add(map.getJunction(n));
 		Vehicle v = new Car(id, max, itinerario, resistance, fault_probability, max_fault_duration, seed);
+		v.moverASiguienteCarretera(itinerario.get(0).road(v));
 		map.addVehicle(v);
 	}
 

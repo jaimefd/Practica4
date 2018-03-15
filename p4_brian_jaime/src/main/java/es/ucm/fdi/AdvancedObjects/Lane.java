@@ -1,5 +1,7 @@
 package es.ucm.fdi.AdvancedObjects;
 
+import java.util.Map;
+
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
@@ -27,6 +29,11 @@ public class Lane extends Road{
 	public Lane(String ident, int l, int maxV, Junction junction_i, Junction junction_f, int lanes) {
 		super(ident, l, maxV, junction_i, junction_f);
 		numCarriles = lanes;
+	}
+	
+	protected void fillReportDetails(Map<String, String> out){
+		out.put("type", "lanes");
+		super.fillReportDetails(out);
 	}
 	
 	/**

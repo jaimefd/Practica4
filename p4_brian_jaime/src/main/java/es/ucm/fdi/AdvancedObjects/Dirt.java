@@ -1,5 +1,7 @@
 package es.ucm.fdi.AdvancedObjects;
 
+import java.util.Map;
+
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
@@ -23,6 +25,11 @@ public class Dirt extends Road{
 
 	public Dirt(String ident, int l, int maxV, Junction junction_i, Junction junction_f) {
 		super(ident, l, maxV, junction_i, junction_f);
+	}
+	
+	protected void fillReportDetails(Map<String, String> out){
+		out.put("type", "dirt");
+		super.fillReportDetails(out);
 	}
 	
 	/**

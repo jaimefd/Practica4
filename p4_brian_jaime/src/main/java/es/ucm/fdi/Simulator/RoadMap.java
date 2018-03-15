@@ -17,10 +17,6 @@ public class RoadMap {
 	private List<Junction> junctions = new ArrayList<>();
 	private List<Road> roads = new ArrayList<>();
 	private List<Vehicle> vehicles = new ArrayList<>();
-
-	private List<Junction> junctionsRO;
-	private List<Road> roadsRO;
-	private List<Vehicle> vehiclesRO; 
 	
 	public RoadMap() {
 		this.vehicles = new ArrayList<>();
@@ -46,15 +42,23 @@ public class RoadMap {
 	}
 	
 	public List<Vehicle> getVehicles() {
-		return vehiclesRO;
+		return vehicles;
 	}
 		
 	public List<Road> getRoads() {
-		return roadsRO;
+		return roads;
 	}
 	
 	public List<Junction> getJunctions() {
-		return junctionsRO;
+		return junctions;
+	}
+	
+	public List<SimObject> getSimObjects() {
+		List<SimObject> list = new ArrayList<>();
+		list.addAll(junctions);
+		list.addAll(roads);
+		list.addAll(vehicles);
+		return list;
 	}
 	
 	public void addVehicle(Vehicle v) {

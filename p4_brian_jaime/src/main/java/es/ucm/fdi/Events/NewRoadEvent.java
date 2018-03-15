@@ -10,8 +10,8 @@ import es.ucm.fdi.Simulator.RoadMap;
 */
 
 public class NewRoadEvent extends Event{
-	private String id, sr, dest;
-	private int max, length;
+	protected String id, sr, dest;
+	protected int max, length;
 	
 	/** 
 	 * Constructor de la clase NewRoadEvent

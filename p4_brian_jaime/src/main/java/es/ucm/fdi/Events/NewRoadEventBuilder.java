@@ -16,8 +16,11 @@ public class NewRoadEventBuilder implements EventBuilder {
 	
 	public Event parse(IniSection sec) {
 		if (!sec.getTag().equals("new_road")) return null;
-		return new NewRoadEvent(parseInt(sec, "time"), sec.getValue("id"), 
-				sec.getValue("src"), sec.getValue("dest"),
+		if (!sec.getKeys().contains("type")) return new NewRoadEvent(parseInt(sec, "time"), sec.getValue("id"), sec.getValue("src"),
+				sec.getValue("dest"), parseInt(sec, "max_speed"), parseInt(sec, "length"));
+		if (sec.getValue("type").equals("lanes")) return new NewLaneEvent(parseInt(sec, "time"), sec.getValue("id"), 
+				sec.getValue("src"), sec.getValue("dest"), parseInt(sec, "max_speed"),parseInt(sec, "length"), parseInt(sec, "lanes"));
+		return new NewDirtEvent(parseInt(sec, "time"), sec.getValue("id"), sec.getValue("src"), sec.getValue("dest"),
 				parseInt(sec, "max_speed"), parseInt(sec, "length"));
 	}
 	

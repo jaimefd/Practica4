@@ -8,6 +8,11 @@ import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
 import es.ucm.fdi.Simulator.RoadMap;
 
+/** 
+ * La clase NewBikeEvent se encarga de crear un coche
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class NewBikeEvent extends NewVehicleEvent{
 	
 	/** 

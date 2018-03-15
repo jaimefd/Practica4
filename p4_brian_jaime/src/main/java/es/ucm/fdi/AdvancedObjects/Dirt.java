@@ -42,9 +42,14 @@ public class Dirt extends Road{
 	 */
 	
 	public void avanza(){
-		int velBase = Math.min(maxVel, maxVel / Math.max(vehiculos.size(), 1) + 1);
+		int velBase = Math.min(maxVel, maxVel / Math.max((int) vehiculos.sizeOfValues(), 1) + 1);
 		int factorRed = 1;
 		MultiTreeMap<Integer, Vehicle> map = new MultiTreeMap<>((a, b) -> a - b);
+		if (vehiculos.containsKey(longitud)){
+			for(Vehicle v: vehiculos.get(longitud)){
+				map.putValue(longitud, v);
+			}
+		}
 		for (int i = longitud - 1; i >= 0; --i){
 			if (vehiculos.containsKey(i)){
 				for(Vehicle v: vehiculos.get(i)){
@@ -55,8 +60,13 @@ public class Dirt extends Road{
 		for (int i = longitud - 1; i >= 0; --i){
 			if (vehiculos.containsKey(i)){
 				for(Vehicle v: vehiculos.get(i)){
-					v.setVelocidadActual(velBase / factorRed);
+					if (v.getAveria()) v.setVelocidadActual(0);
+					else v.setVelocidadActual(velBase / factorRed);
 					v.avanza();
+					if (v.getPos() == longitud) {
+						v.setVelocidadActual(0);
+						getQueue().add(v);
+					}
 					map.putValue(v.getPos(), v);
 				}
 			}

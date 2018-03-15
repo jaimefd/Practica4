@@ -16,7 +16,13 @@ public class NewVehicleEventBuilder implements EventBuilder{
 	
 	public Event parse(IniSection sec) {
 		if (!sec.getTag().equals("new_vehicle")) return null;
-		return new NewVehicleEvent(parseInt(sec, "time"), sec.getValue("id"),
+		if (!sec.getKeys().contains("type")) return new NewVehicleEvent(parseInt(sec, "time"), sec.getValue("id"),
+				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"));
+		if (sec.getValue("type").equals("car")) return new NewCarEvent(parseInt(sec, "time"), sec.getValue("id"),
+				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"), parseInt(sec, "resistance"),
+				parseDouble(sec, "fault_probability"), parseInt(sec, "max_fault_duration"),
+				parseLong(sec,"seed"));
+		return new NewBikeEvent(parseInt(sec, "time"), sec.getValue("id"),
 				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"));
 	}
 	
@@ -46,6 +52,28 @@ public class NewVehicleEventBuilder implements EventBuilder{
 	
 	public int parseInt(IniSection sec, String key){
 		return Integer.parseInt(sec.getValue(key));
+	}
+	
+	/** 
+	 * Método que convierte una key de una sección en un double
+	 * @param sec La sección.
+	 * @param key La clave que va a ser convertida en double.
+	 * @return El double obtenido a partir de la key.
+	*/
+	
+	public double parseDouble(IniSection sec, String key){
+		return Double.parseDouble(sec.getValue(key));
+	}
+	
+	/** 
+	 * Método que convierte una key de una sección en un long
+	 * @param sec La sección.
+	 * @param key La clave que va a ser convertida en long.
+	 * @return El long obtenido a partir de la key.
+	*/
+	
+	public long parseLong(IniSection sec, String key){
+		return Long.parseLong(sec.getValue(key));
 	}
 	
 	/** 

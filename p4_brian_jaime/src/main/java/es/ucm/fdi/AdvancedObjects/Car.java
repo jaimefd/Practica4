@@ -8,10 +8,11 @@ import es.ucm.fdi.SimulatedObjects.Vehicle;
 
 public class Car extends Vehicle{
 	
-	private int dist, resistenciaKm, probabilidadDeAveria, duracionMaximaAveria;
+	private int dist, resistenciaKm, duracionMaximaAveria;
+	private double probabilidadDeAveria;
 	private Random numAleatorio;
 
-	public Car(String ident, int vmax, List<Junction> it, int resistance, int fault_probability, int max_fault_duration, long semilla) {
+	public Car(String ident, int vmax, List<Junction> it, int resistance, double fault_probability, int max_fault_duration, long semilla) {
 		super(ident, vmax, it);
 		dist = 0;
 		resistenciaKm = resistance;

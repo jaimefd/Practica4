@@ -11,10 +11,10 @@ import java.util.Map;
 */
 
 public class Junction extends SimObject {
-	private int k; //***
-	private List<Road> entrantes;
-	private List<Road> salientes;
-	private Map<Junction, Road> mapSaliente;
+	protected int k; //***
+	protected List<Road> entrantes;
+	protected List<Road> salientes;
+	protected Map<Junction, Road> mapSaliente;
 	/** 
 	 * Constructor de la clase Junction.
 	 * @param ident : Identificador

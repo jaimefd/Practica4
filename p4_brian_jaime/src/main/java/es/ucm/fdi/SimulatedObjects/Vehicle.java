@@ -3,6 +3,11 @@ package es.ucm.fdi.SimulatedObjects;
 import java.util.List;
 import java.util.Map;
 
+/** 
+ * La clase Vehicle representa un vehículo del simulador.
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class Vehicle extends SimObject {
 	protected int velMaxima, velActual, distTotal;
 	private int localizacion, k, tiempoAveria;
@@ -10,6 +15,12 @@ public class Vehicle extends SimObject {
 	private List<Junction> itinerario;
 	private boolean haLlegado;
 	
+	/** 
+	 * Constructor de la clase Vehicle.
+	 * @param ident : Identificador
+	 * @param maxV : Velocidad máxima del vehículo
+	 * @param it: Itinerario de cruces que debe seguir el vehículo
+	*/
 	public Vehicle(String ident, int vmax, List<Junction> it){
 		super(ident);
 		velMaxima = vmax;
@@ -21,30 +32,75 @@ public class Vehicle extends SimObject {
 		haLlegado = false;
 	}
 	
+	/** 
+	 * Devuelve true si el vehículo presenta una avería (tiempoAveria > 0).
+	 * @return Booleano que indica si hay avería
+	*/
 	public boolean getAveria(){
 		return tiempoAveria > 0;
 	}
 	
+	/** 
+	 * Devuelve true si el vehículo ha llegado a su destino.
+	 * @return Booleano que indica si se ha llegado al final
+	*/
 	public boolean fin(){
 		return k == itinerario.size();
 	}
 	
+	/** 
+	 * Método get para localizacion.
+	 * @return Posición del vehículo en su carretera actual
+	*/
 	public int getPos(){
 		return localizacion;
 	}
 	
+	/** 
+	 * Método get para roadActual.
+	 * @return Carretera actual
+	*/
 	public Road getCarretera(){
 		return roadActual;
 	}
 	
+	/** 
+	 * Devuelve el siguiente cruce al que llegará el vehículo.
+	 * @return Próximo cruce en el itinerario de Vehicle
+	*/
 	public Junction sigCruce() {
 		return itinerario.get(k);
 	}
 	
+	/** 
+	 * Devuelve la cabecera del informe de Vehicle.
+	 * @return Cabecera del informe
+	*/
 	protected String getReportHeader(){
 		return "vehicle_report";
 	}
 	
+	/** 
+	 * Aumenta tiempoAveria.
+	 * @param n: Tiempo de avería
+	*/
+	public void setTiempoAveria(int n) {
+		tiempoAveria += n;
+	}
+	
+	/** 
+	 * Método set para velActual.
+	 * @param v: Nueva velocidad
+	*/
+	public void setVelocidadActual(int v){
+		if (v > velMaxima) velActual = velMaxima;
+		else velActual = v;
+	}
+	
+	/** 
+	 * Informe de Vehicle.
+	 * @param out : Mapa para salida de datos
+	*/
 	protected void fillReportDetails(Map<String, String> out){
 		String s;
 		if (!haLlegado) {
@@ -57,6 +113,9 @@ public class Vehicle extends SimObject {
 		out.put("location", s);
 	}
 	
+	/** 
+	 * Método avanza para Vehicle.
+	*/
 	public void avanza(){
 		if (tiempoAveria > 0) --tiempoAveria;
 		else if (!haLlegado){
@@ -70,6 +129,10 @@ public class Vehicle extends SimObject {
 		}
 	}
 	
+	/** 
+	 * Lleva al vehículo a otra carretera.
+	 * @param r : Nueva carretera
+	*/
 	public void moverASiguienteCarretera(Road r){
 		if (k > 1) roadActual.saleVehiculo(this);
 		roadActual = r;
@@ -77,15 +140,6 @@ public class Vehicle extends SimObject {
 		velActual = 0;
 		if (k == itinerario.size()) haLlegado = true;
 		else roadActual.entraVehiculo(this);
-	}
-	
-	public void setTiempoAveria(int n) {
-		tiempoAveria += n;
-	}
-	
-	public void setVelocidadActual(int v){
-		if (v > velMaxima) velActual = velMaxima;
-		else velActual = v;
 	}
 	
 }

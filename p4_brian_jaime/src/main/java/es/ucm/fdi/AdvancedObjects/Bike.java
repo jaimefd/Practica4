@@ -19,7 +19,6 @@ public class Bike extends Vehicle{
 	 * @param vmax : Velocidad máxima
 	 * @param it : Itinerario
 	*/
-
 	public Bike(String ident, int vmax, List<Junction> it) {
 		super(ident, vmax, it);
 	}
@@ -27,7 +26,7 @@ public class Bike extends Vehicle{
 	/**
 	 * Informe de Bike
 	 * @param out : Mapa con los datos de Bike
-	 */
+	*/
 	protected void fillReportDetails(Map<String, String> out){
 		out.put("type", "bike");
 		super.fillReportDetails(out);
@@ -36,8 +35,7 @@ public class Bike extends Vehicle{
 	/**
 	 * Método que ajusta el tiempo de avería
 	 * @param n : Tiempo de avería
-	 */
-	
+	*/
 	public void setTiempoAveria(int n) {
 		if (2 * velActual > velMaxima)
 			super.setTiempoAveria(n);

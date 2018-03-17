@@ -28,7 +28,6 @@ public class Car extends Vehicle{
 	 * @param max_fault_duration : Tiempo máximo de avería
 	 * @param semilla : Seed aleatoria para decidir si se avería y cuánto durará la avería
 	*/
-
 	public Car(String ident, int vmax, List<Junction> it, int resistance, double fault_probability, int max_fault_duration, long semilla) {
 		super(ident, vmax, it);
 		k = 0;
@@ -41,7 +40,7 @@ public class Car extends Vehicle{
 	/**
 	 * Informe de Car
 	 * @param out : Mapa con los datos de Car
-	 */
+	*/
 	protected void fillReportDetails(Map<String, String> out){
 		out.put("type", "car");
 		super.fillReportDetails(out);
@@ -49,8 +48,7 @@ public class Car extends Vehicle{
 	
 	/**
 	 * Método que comprueba si se avería y hace avanzar el coche
-	 */
-	
+	*/
 	public void avanza(){
 		if (!super.getAveria() && (distTotal - k * resistenciaKm) > resistenciaKm && numAleatorio.nextDouble() < probabilidadDeAveria) {
 			super.setTiempoAveria(numAleatorio.nextInt(duracionMaximaAveria) + 1);

@@ -14,23 +14,39 @@ import es.ucm.fdi.ini.Ini;
 import es.ucm.fdi.ini.IniSection;
 import es.ucm.fdi.util.MultiTreeMap;
 
+/** 
+ * La clase TrafficSimulator representa el simulador.
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class TrafficSimulator {
 	private int contadorTiempo;
 	private MultiTreeMap<Integer, Event> eventos;
 	private RoadMap SimObjects;
-
+	
+	/** 
+	 * Constructor de la clase TrafficSimulator.
+	*/
 	public TrafficSimulator() {
 		this.SimObjects = new RoadMap();
 		this.eventos = new MultiTreeMap<>();
 		this.contadorTiempo = 0;
 	}
 	
+	/** 
+	 * Añade un evento a la lista de eventos.
+	 * @param e : Evento
+	*/
 	public void insertaEvento(Event e) {
 		if (e.getTime() < contadorTiempo)
 			throw new IllegalArgumentException();
 		eventos.putValue(e.getTime(), e);
 	}
 	
+	/** 
+	 * Devuelve el informe de salida en formato Ini.
+	 * @return salida : Informe del simulador
+	*/
 	public Ini report() {
 		Map<String, String> m = new LinkedHashMap<>();
 		Ini salida = new Ini();
@@ -46,6 +62,11 @@ public class TrafficSimulator {
 		return salida;
 	}
 	
+	/** 
+	 * Ejecución del simulador.
+	 * @param pasosSimulacion : Tiempo que dura la simulación
+	 * @param o : Flujo de salida
+	*/
 	public void execute(int pasosSimulacion, OutputStream o) throws IOException{
 		int limiteTiempo = this.contadorTiempo + pasosSimulacion - 1;
 		while (this.contadorTiempo <= limiteTiempo) {

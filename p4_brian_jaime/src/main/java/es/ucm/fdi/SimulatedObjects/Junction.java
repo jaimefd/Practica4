@@ -15,6 +15,7 @@ public class Junction extends SimObject {
 	protected List<Road> entrantes;
 	protected List<Road> salientes;
 	protected Map<Junction, Road> mapSaliente;
+	
 	/** 
 	 * Constructor de la clase Junction.
 	 * @param ident : Identificador
@@ -26,6 +27,7 @@ public class Junction extends SimObject {
 		salientes = new ArrayList<>();
 		mapSaliente = new HashMap<>();
 	}
+	
 	/** 
 	 * Introduce un vehiculo en la cola de su carretera.
 	 * @param v : Vehículo
@@ -34,13 +36,16 @@ public class Junction extends SimObject {
 		for (Road r : entrantes)
 			if (r == v.getCarretera()) r.getQueue().add(v);
 	}
+	
 	/** 
 	 * Devuelve la carretera en la que se encuentra un vehículo.
 	 * @param v : Vehículo
+	 * @return Carretera actual del vehículo
 	*/
 	public Road road(Vehicle v) {
 		return mapSaliente.get(v.sigCruce());
 	}
+	
 	/** 
 	 * Añade una carretera entrante.
 	 * @param r : Carretera
@@ -49,6 +54,7 @@ public class Junction extends SimObject {
 		entrantes.add(r);
 		if (entrantes.size() == 1) r.setSemaforo(true);
 	}
+	
 	/** 
 	 * Añade una carretera saliente.
 	 * @param r : Carretera
@@ -57,6 +63,7 @@ public class Junction extends SimObject {
 		salientes.add(r);
 		mapSaliente.put(r.getFin(), r);
 	}
+	
 	/** 
 	 * Devuelve la cabecera del informe de Junction.
 	 * @return Cabecera del informe
@@ -64,6 +71,7 @@ public class Junction extends SimObject {
 	protected String getReportHeader(){
 		return "junction_report";
 	}
+	
 	/** 
 	 * Informe de Junction.
 	 * @param out : Mapa para salida de datos
@@ -86,6 +94,7 @@ public class Junction extends SimObject {
 		}
 		out.put("queues", s);
 	}
+	
 	/** 
 	 * Método avanza para Junction.
 	*/

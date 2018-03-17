@@ -31,7 +31,22 @@ public class MostCrowded extends Junction {
 	 * @param out : Mapa para salida de datos
 	*/
 	protected void fillReportDetails(Map<String, String> out){
-		super.fillReportDetails(out);
+		String s = "";
+		if (!entrantes.isEmpty()) {
+			for (int i = 0; i < entrantes.size(); ++i){
+				s += "(" + entrantes.get(i).getID() + ",";
+				if (entrantes.get(i).getSemaforo()) s += "green:" + (intervaloDeTiempo - unidadesDeTiempoUsadas) + ",[";
+				else s += "red,[";
+				if (!entrantes.get(i).getQueue().isEmpty()) {
+					for (Vehicle v : entrantes.get(i).getQueue())
+						s += v.getID() + ",";
+					s = s.substring(0, s.length() - 1);
+				}
+				s += "]),";
+			}
+			s = s.substring(0, s.length() - 1);
+		}
+		out.put("queues", s);
 		out.put("type", "mc");
 	}
 	
@@ -52,10 +67,22 @@ public class MostCrowded extends Junction {
 				else v.moverASiguienteCarretera(null);
 				entrantes.get(k).getQueue().pop();
 			}
-			entrantes.get(k).setSemaforo(false);
-			k++;
-			if (k == entrantes.size()) k = 0;
-			entrantes.get(k).setSemaforo(true);
+			if (unidadesDeTiempoUsadas == intervaloDeTiempo) {
+				entrantes.get(k).setSemaforo(false);
+				int l = k;
+				k++;
+				if (k == entrantes.size()) k = 0;
+				for(int i = l + 1; i < entrantes.size(); i++){
+					if (entrantes.get(i).getQueue().size() > entrantes.get(k).getQueue().size()) k = i;
+				}
+				for(int i = 0; i < l; i++){
+					if (entrantes.get(i).getQueue().size() > entrantes.get(k).getQueue().size()) k = i;
+				}
+				entrantes.get(k).setSemaforo(true);
+				intervaloDeTiempo = Math.max((int) entrantes.get(k).getQueue().size() / 2, 1);
+				unidadesDeTiempoUsadas = 0;
+			}
+			else unidadesDeTiempoUsadas++;
 		}
 	}
 	

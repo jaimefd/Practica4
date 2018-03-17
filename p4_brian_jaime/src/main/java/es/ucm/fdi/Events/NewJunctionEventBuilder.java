@@ -16,7 +16,10 @@ public class NewJunctionEventBuilder implements EventBuilder {
 	
 	public Event parse(IniSection sec) {
 		if (!sec.getTag().equals("new_junction")) return null;
-		return new NewJunctionEvent(Integer.parseInt(sec.getValue("time")), sec.getValue("id"));
+		if (!sec.getKeys().contains("type")) return new NewJunctionEvent(Integer.parseInt(sec.getValue("time")), sec.getValue("id"));
+		return new NewRoundRobinEvent(Integer.parseInt(sec.getValue("time")), sec.getValue("id"), 
+									  Integer.parseInt(sec.getValue("max_time_slice")),
+									  Integer.parseInt(sec.getValue("min_time_slice")));
 	}
 	
 	/** 

@@ -18,10 +18,15 @@ public class NewVehicleEventBuilder implements EventBuilder{
 		if (!sec.getTag().equals("new_vehicle")) return null;
 		if (!sec.getKeys().contains("type")) return new NewVehicleEvent(parseInt(sec, "time"), sec.getValue("id"),
 				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"));
-		if (sec.getValue("type").equals("car")) return new NewCarEvent(parseInt(sec, "time"), sec.getValue("id"),
-				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"), parseInt(sec, "resistance"),
-				parseDouble(sec, "fault_probability"), parseInt(sec, "max_fault_duration"),
-				parseLong(sec,"seed"));
+		if (sec.getValue("type").equals("car")) {
+			long seed;
+			if (sec.getValue("seed").isEmpty()) seed = System.currentTimeMillis();
+			else seed = parseLong(sec,"seed");
+			return new NewCarEvent(parseInt(sec, "time"), sec.getValue("id"), parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"), parseInt(sec, "resistance"),
+					parseDouble(sec, "fault_probability"), parseInt(sec, "max_fault_duration"),
+					seed);
+		}
+				
 		return new NewBikeEvent(parseInt(sec, "time"), sec.getValue("id"),
 				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"));
 	}

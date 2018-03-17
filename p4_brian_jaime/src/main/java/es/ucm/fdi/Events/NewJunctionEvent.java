@@ -9,7 +9,7 @@ import es.ucm.fdi.Simulator.RoadMap;
 */
 
 public class NewJunctionEvent extends Event{
-	private String id;
+	protected String id;
 	
 	/** 
 	 * Constructor de la clase NewJunctionEvent

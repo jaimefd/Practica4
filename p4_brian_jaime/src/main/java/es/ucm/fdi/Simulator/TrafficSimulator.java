@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import Exceptions.SimulatorException;
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.Events.Event;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;

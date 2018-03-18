@@ -1,4 +1,4 @@
-package Exceptions;
+package es.ucm.fdi.Exceptions;
 
 /** 
  * La excepción SimulatorException se lanza cuando se detectan errores en el simulador.

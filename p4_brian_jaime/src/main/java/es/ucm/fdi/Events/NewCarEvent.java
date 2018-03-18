@@ -3,7 +3,7 @@ package es.ucm.fdi.Events;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.SimulatorException;
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.AdvancedObjects.Car;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Vehicle;

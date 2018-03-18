@@ -18,7 +18,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import Exceptions.SimulatorException;
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.Control.Controller;
 import es.ucm.fdi.Simulator.TrafficSimulator;
 import es.ucm.fdi.ini.Ini;

@@ -1,6 +1,6 @@
 package es.ucm.fdi.Events;
 
-import Exceptions.SimulatorException;
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.Simulator.RoadMap;

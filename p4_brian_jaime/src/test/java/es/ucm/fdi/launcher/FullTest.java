@@ -3,7 +3,7 @@ package es.ucm.fdi.launcher;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import Exceptions.SimulatorException;
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.launcher.Main;
 
 public class FullTest {

@@ -3,7 +3,7 @@ package es.ucm.fdi.Control;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import Exceptions.SimulatorException;
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.Events.EventBuilder;
 import es.ucm.fdi.Events.NewJunctionEventBuilder;
 import es.ucm.fdi.Events.NewRoadEventBuilder;

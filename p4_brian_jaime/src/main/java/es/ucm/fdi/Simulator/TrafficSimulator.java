@@ -66,8 +66,9 @@ public class TrafficSimulator {
 	 * Ejecución del simulador.
 	 * @param pasosSimulacion : Tiempo que dura la simulación
 	 * @param o : Flujo de salida
+	 * @throws IOException 
 	*/
-	public void execute(int pasosSimulacion, OutputStream o) throws IOException{
+	public void execute(int pasosSimulacion, OutputStream o) throws IOException {
 		int limiteTiempo = this.contadorTiempo + pasosSimulacion - 1;
 		while (this.contadorTiempo <= limiteTiempo) {
 			List<Event> eventActuales = eventos.get(contadorTiempo);

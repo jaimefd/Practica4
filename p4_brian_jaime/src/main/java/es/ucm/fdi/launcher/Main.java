@@ -22,7 +22,7 @@ import es.ucm.fdi.Control.Controller;
 import es.ucm.fdi.Simulator.TrafficSimulator;
 import es.ucm.fdi.ini.Ini;
 
-public class ExampleMain {
+public class Main {
 
 	private final static Integer _timeLimitDefaultValue = 10;
 	private static Integer _timeLimit = null;
@@ -81,7 +81,7 @@ public class ExampleMain {
 	private static void parseHelpOption(CommandLine line, Options cmdLineOptions) {
 		if (line.hasOption("h")) {
 			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp(ExampleMain.class.getCanonicalName(), cmdLineOptions, true);
+			formatter.printHelp(Main.class.getCanonicalName(), cmdLineOptions, true);
 			System.exit(0);
 		}
 	}
@@ -115,7 +115,7 @@ public class ExampleMain {
 	 * 
 	 * @throws IOException
 	 */
-	private static void test(String path) throws IOException {
+	static void test(String path) throws IOException {
 
 		File dir = new File(path);
 
@@ -131,7 +131,7 @@ public class ExampleMain {
 		});
 
 		for (File file : files) {
-			test(file.getAbsolutePath(), file.getAbsolutePath() + ".out", file.getAbsolutePath() + ".eout",100);
+			test(file.getAbsolutePath(), file.getAbsolutePath() + ".out", file.getAbsolutePath() + ".eout",10);
 		}
 
 	}

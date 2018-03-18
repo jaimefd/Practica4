@@ -22,7 +22,6 @@ public class NewBikeEvent extends NewVehicleEvent{
 	 * @param max Velocidad maxima de la bicicleta
 	 * @param cruces Array de strings con el itinerario de cruces
 	*/
-
 	public NewBikeEvent(int time, String id, int max, String[] cruces) {
 		super(time, id, max, cruces);
 	}
@@ -31,7 +30,6 @@ public class NewBikeEvent extends NewVehicleEvent{
 	 * Método que ejecuta el evento de creación de una nueva Bicicleta
 	 * @param map El mapa de carreteras e intersecciones.
 	*/
-	
 	public void execute(RoadMap map) {
 		
 		List<Junction> itinerario = new ArrayList<>();

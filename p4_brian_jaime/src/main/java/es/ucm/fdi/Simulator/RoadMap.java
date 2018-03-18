@@ -39,6 +39,7 @@ public class RoadMap {
 	 * @return SimObject asociado al identificador
 	*/
 	public SimObject getSimObject(String id) {
+		if (!simObjects.containsKey(id)) throw new NullPointerException();
 		return simObjects.get(id);
 	}
 	
@@ -48,6 +49,7 @@ public class RoadMap {
 	 * @return Vehicle asociado al identificador
 	*/
 	public Vehicle getVehicle(String id) {
+		if (!simObjects.containsKey(id)) throw new NullPointerException();
 		return (Vehicle) getSimObject(id);
 	}
 	
@@ -57,6 +59,7 @@ public class RoadMap {
 	 * @return Road asociado al identificador
 	*/
 	public Road getRoad(String id) {
+		if (!simObjects.containsKey(id)) throw new NullPointerException();
 		return (Road) getSimObject(id);
 	}
 	
@@ -66,6 +69,7 @@ public class RoadMap {
 	 * @return Junction asociado al identificador
 	*/
 	public Junction getJunction(String id) {
+		if (!simObjects.containsKey(id)) throw new NullPointerException();
 		return (Junction) getSimObject(id);
 	}
 	

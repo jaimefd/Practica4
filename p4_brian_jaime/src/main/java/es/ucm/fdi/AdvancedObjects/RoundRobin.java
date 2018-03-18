@@ -9,7 +9,7 @@ import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
 
 /** 
- * La clase RoundRobin representa un cruce circular.
+ * La clase RoundRobin representa un cruce circular del simulador.
  * @author Jaime Fernández y Brian Leiva
 */
 
@@ -21,7 +21,6 @@ public class RoundRobin extends Junction{
 	 * Constructor de la clase RoundRobin.
 	 * @param ident : Identificador
 	*/
-
 	public RoundRobin(String ident, int max, int min) {
 		super(ident);
 		maxValorIntervalo = max;
@@ -46,11 +45,10 @@ public class RoundRobin extends Junction{
 	 */
 	protected void fillReportDetails(Map<String, String> out){
 		String s = "";
-		out.put("type", "rr");
 		if (!entrantes.isEmpty()) {
 			for (int i = 0; i < entrantes.size(); ++i){
 				s += "(" + entrantes.get(i).getID() + ",";
-				if (entrantes.get(i).getSemaforo()) s += "green,:" + (intervaloDeTiempo.get(i) - unidadesDeTiempoUsadas) + "[";
+				if (entrantes.get(i).getSemaforo()) s += "green:" + (intervaloDeTiempo.get(i) - unidadesDeTiempoUsadas) + ",[";
 				else s += "red,[";
 				if (!entrantes.get(i).getQueue().isEmpty()) {
 					for (Vehicle v : entrantes.get(i).getQueue())
@@ -62,6 +60,7 @@ public class RoundRobin extends Junction{
 			s = s.substring(0, s.length() - 1);
 		}
 		out.put("queues", s);
+		out.put("type", "rr");
 	}
 	
 	/** 
@@ -82,6 +81,7 @@ public class RoundRobin extends Junction{
 				else v.moverASiguienteCarretera(null);
 				entrantes.get(k).getQueue().pop();
 			}
+			++unidadesDeTiempoUsadas;
 			if (unidadesDeTiempoUsadas == intervaloDeTiempo.get(k)) {
 				entrantes.get(k).setSemaforo(false);
 				if (usos == unidadesDeTiempoUsadas) 
@@ -94,7 +94,6 @@ public class RoundRobin extends Junction{
 				if (k == entrantes.size()) k = 0;
 				entrantes.get(k).setSemaforo(true);
 			}
-			else ++unidadesDeTiempoUsadas;
 		}
 	}
 	

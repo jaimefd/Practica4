@@ -19,11 +19,11 @@ public class MostCrowded extends Junction {
 	 * Constructor de la clase MostCrowded.
 	 * @param ident : Identificador
 	*/
-
 	public MostCrowded(String ident) {
 		super(ident);
 		intervaloDeTiempo = 0;
 		unidadesDeTiempoUsadas = 0;
+		k = -1;
 	}
 	
 	/** 
@@ -54,8 +54,11 @@ public class MostCrowded extends Junction {
 	 * Método avanza para MostCrowded.
 	*/
 	public void avanza(){
-		if (k == -1) {
+		if (k == -1 ) {
 			k = 0;
+			entrantes.get(k).setSemaforo(true);
+			intervaloDeTiempo = Math.max((int) entrantes.get(k).getQueue().size() / 2, 1);
+			unidadesDeTiempoUsadas = 0;
 		}
 		else if (!entrantes.isEmpty()) {
 			if (!entrantes.get(k).getQueue().isEmpty()) {
@@ -67,6 +70,7 @@ public class MostCrowded extends Junction {
 				else v.moverASiguienteCarretera(null);
 				entrantes.get(k).getQueue().pop();
 			}
+			++unidadesDeTiempoUsadas;
 			if (unidadesDeTiempoUsadas == intervaloDeTiempo) {
 				entrantes.get(k).setSemaforo(false);
 				int l = k;
@@ -82,7 +86,6 @@ public class MostCrowded extends Junction {
 				intervaloDeTiempo = Math.max((int) entrantes.get(k).getQueue().size() / 2, 1);
 				unidadesDeTiempoUsadas = 0;
 			}
-			else unidadesDeTiempoUsadas++;
 		}
 	}
 	

@@ -14,7 +14,6 @@ public abstract class Event {
 	 * Constructor de la clase Event
 	 * @param t Entero que representa el momento en el que ocurrirá el evento.
 	*/
-	
 	public Event(int t) {
 		time = t;
 	}
@@ -22,7 +21,6 @@ public abstract class Event {
 	/** 
 	 * Método para obtener el momento en el que ocurrirá el evento.
 	*/
-	
 	public int getTime() {
 		return time;
 	}
@@ -31,7 +29,6 @@ public abstract class Event {
 	 * Método abstracto que ejecuta el evento
 	 * @param map El mapa de carreteras e intersecciones.
 	*/
-	
 	public abstract void execute(RoadMap map);
 	
 }

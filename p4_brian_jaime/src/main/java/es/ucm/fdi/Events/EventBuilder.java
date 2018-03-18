@@ -13,7 +13,6 @@ public interface EventBuilder {
 	 * Método para reconocer qué tipo de evento representa la sección.
 	 * @param sec La sección del evento
 	*/
-	
 	public Event parse(IniSection sec);
 	
 	/** 

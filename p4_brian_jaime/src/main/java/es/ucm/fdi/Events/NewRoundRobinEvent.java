@@ -3,6 +3,11 @@ package es.ucm.fdi.Events;
 import es.ucm.fdi.AdvancedObjects.RoundRobin;
 import es.ucm.fdi.Simulator.RoadMap;
 
+/** 
+ * La clase NewRoundRobinEvent se encarga de crear un cruce circular
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class NewRoundRobinEvent extends NewJunctionEvent{
 	private int max_time_slice, min_time_slice;
 	
@@ -22,7 +27,7 @@ public class NewRoundRobinEvent extends NewJunctionEvent{
 	}
 	
 	/** 
-	 * Método que ejecuta el evento de creación de un nuevo cruce
+	 * Método que ejecuta el evento de creación de un nuevo cruce circular
 	 * @param map El mapa de carreteras e intersecciones.
 	*/
 

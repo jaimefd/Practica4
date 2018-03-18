@@ -26,7 +26,6 @@ public class NewVehicleEventBuilder implements EventBuilder{
 					parseDouble(sec, "fault_probability"), parseInt(sec, "max_fault_duration"),
 					seed);
 		}
-				
 		return new NewBikeEvent(parseInt(sec, "time"), sec.getValue("id"),
 				parseInt(sec, "max_speed"), parseIdList(sec, "itinerary"));
 	}

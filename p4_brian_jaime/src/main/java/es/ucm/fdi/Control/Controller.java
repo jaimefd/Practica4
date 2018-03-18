@@ -27,11 +27,10 @@ public class Controller {
 	
 	/** 
 	 * Constructor de la clase Controller.
-	 * @param ini
-	 * @param out
-	 * @param timeLimit
+	 * @param ini : Flujo de entrada (formato ini)
+	 * @param out : Flujo de salida
+	 * @param timeLimit : Tiempo durante el que se ejecuta la simulación
 	*/
-	
 	public Controller(Ini ini, OutputStream out, Integer timeLimit) {
 		this.ini = ini;
 		this.out = out;
@@ -41,16 +40,18 @@ public class Controller {
 	/** 
 	 * Método que lee las secciones de eventos, les asigna el builder correspondiente a cada una, y ejecuta la simulación.
 	 * @param sim : La simulación de tráfico
+	 * @throws IOException 
 	*/
-	
 	public void execute(TrafficSimulator sim) throws IOException {
 
 		for (IniSection n : ini.getSections()) {
 			boolean b = false;
-			for (EventBuilder eBuilder : events) {
-				if (n.getTag().equals(eBuilder.type())) {
-					sim.insertaEvento(eBuilder.parse(n));
-					b = true;
+			if (!n.getTag().isEmpty()) {
+				for (EventBuilder eBuilder : events) {
+					if (n.getTag().equals(eBuilder.type())) {
+						sim.insertaEvento(eBuilder.parse(n));
+						b = true;
+					}
 				}
 			}
 			if (!b)

@@ -22,7 +22,6 @@ public class Dirt extends Road{
 	 * @param junction_i : Cruce inicial
 	 * @param junction_f : Cruce final
 	*/
-
 	public Dirt(String ident, int l, int maxV, Junction junction_i, Junction junction_f) {
 		super(ident, l, maxV, junction_i, junction_f);
 	}
@@ -31,7 +30,6 @@ public class Dirt extends Road{
 	 * Rellena el informe de Dirt
 	 * @param out : Mapa con los datos de Dirt
 	 */
-	
 	protected void fillReportDetails(Map<String, String> out){
 		out.put("type", "dirt");
 		super.fillReportDetails(out);
@@ -40,9 +38,7 @@ public class Dirt extends Road{
 	/**
 	 * Método que hace avanzar la simulación en el camino
 	 */
-	
 	public void avanza(){
-		int velBase = Math.min(maxVel, maxVel / Math.max((int) vehiculos.sizeOfValues(), 1) + 1);
 		int factorRed = 1;
 		MultiTreeMap<Integer, Vehicle> map = new MultiTreeMap<>((a, b) -> a - b);
 		if (vehiculos.containsKey(longitud)){
@@ -61,7 +57,7 @@ public class Dirt extends Road{
 			if (vehiculos.containsKey(i)){
 				for(Vehicle v: vehiculos.get(i)){
 					if (v.getAveria()) v.setVelocidadActual(0);
-					else v.setVelocidadActual(velBase / factorRed);
+					else v.setVelocidadActual(maxVel / factorRed);
 					v.avanza();
 					if (v.getPos() == longitud) {
 						v.setVelocidadActual(0);

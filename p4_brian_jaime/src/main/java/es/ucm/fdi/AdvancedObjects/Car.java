@@ -14,7 +14,7 @@ import es.ucm.fdi.SimulatedObjects.Vehicle;
 
 public class Car extends Vehicle{
 	
-	private int k, resistenciaKm, duracionMaximaAveria;
+	private int resistenciaKm, duracionMaximaAveria, dist;
 	private double probabilidadDeAveria;
 	private Random numAleatorio;
 	
@@ -30,11 +30,11 @@ public class Car extends Vehicle{
 	*/
 	public Car(String ident, int vmax, List<Junction> it, int resistance, double fault_probability, int max_fault_duration, long semilla) {
 		super(ident, vmax, it);
-		k = 0;
 		resistenciaKm = resistance;
 		probabilidadDeAveria = fault_probability;
 		duracionMaximaAveria = max_fault_duration;
 		numAleatorio = new Random(semilla);
+		dist = 0;
 	}
 	
 	/**
@@ -50,12 +50,14 @@ public class Car extends Vehicle{
 	 * Método que comprueba si se avería y hace avanzar el coche
 	*/
 	public void avanza(){
-		if (!super.getAveria() && (distTotal - k * resistenciaKm) > resistenciaKm && numAleatorio.nextDouble() < probabilidadDeAveria) {
+		int n = distTotal;
+		if (!super.getAveria() && dist > resistenciaKm && numAleatorio.nextDouble() < probabilidadDeAveria) {
 			super.setTiempoAveria(numAleatorio.nextInt(duracionMaximaAveria) + 1);
 			super.setVelocidadActual(0);
-			k++;
+			dist = 0;
 		}
 		super.avanza();
+		dist += distTotal - n;
 	}
 
 }

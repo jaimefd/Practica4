@@ -25,7 +25,6 @@ public class Lane extends Road{
 	 * @param junction_f : Cruce final
 	 * @param lanes : Carriles de la autopista
 	*/
-
 	public Lane(String ident, int l, int maxV, Junction junction_i, Junction junction_f, int lanes) {
 		super(ident, l, maxV, junction_i, junction_f);
 		numCarriles = lanes;
@@ -35,7 +34,6 @@ public class Lane extends Road{
 	 * Rellena el informe de Lane
 	 * @param out : Mapa con los datos de Lane
 	 */
-	
 	protected void fillReportDetails(Map<String, String> out){
 		out.put("type", "lanes");
 		super.fillReportDetails(out);
@@ -44,7 +42,6 @@ public class Lane extends Road{
 	/**
 	 * Método que hace avanzar la simulación en la autopista
 	 */
-	
 	public void avanza(){
 		int velBase = Math.min(maxVel, maxVel * numCarriles / Math.max((int) vehiculos.sizeOfValues(), 1) + 1);
 		int factorRed = 1, numObstaculos = 0;

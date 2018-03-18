@@ -3,6 +3,7 @@ package es.ucm.fdi.Events;
 import java.util.ArrayList;
 import java.util.List;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.AdvancedObjects.Bike;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
@@ -29,15 +30,25 @@ public class NewBikeEvent extends NewVehicleEvent{
 	/** 
 	 * Método que ejecuta el evento de creación de una nueva Bicicleta
 	 * @param map El mapa de carreteras e intersecciones.
+	 * @throws SimulatorException 
 	*/
-	public void execute(RoadMap map) {
+	public void execute(RoadMap map) throws SimulatorException {
 		
 		List<Junction> itinerario = new ArrayList<>();
-		for (String n : cruces)
-			itinerario.add(map.getJunction(n));
-		Vehicle v = new Bike(id, max, itinerario);
-		v.moverASiguienteCarretera(itinerario.get(0).road(v));
-		map.addVehicle(v);
+		try {
+			for (String n : cruces)
+				itinerario.add(map.getJunction(n));
+			Vehicle v = new Bike(id, max, itinerario);
+			v.moverASiguienteCarretera(itinerario.get(0).road(v));
+			map.addVehicle(v);
+		}
+		catch(NullPointerException e) {
+			throw new SimulatorException("Bike " + id + ": invalid itinerary");
+		}
+		catch(IllegalArgumentException e) {
+			throw new SimulatorException("Bike " + id + ": id already exists");
+		}
+		
 	}
 
 }

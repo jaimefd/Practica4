@@ -1,5 +1,6 @@
 package es.ucm.fdi.Events;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.Simulator.RoadMap;
@@ -35,15 +36,24 @@ public class NewRoadEvent extends Event{
 	/** 
 	 * Método que ejecuta el evento de creación de una nueva carretera
 	 * @param map : El mapa de carreteras e intersecciones.
+	 * @throws SimulatorException 
 	*/
 
-	public void execute(RoadMap map) {
-		Junction ini = map.getJunction(sr);
-		Junction fin = map.getJunction(dest);
-		Road r = new Road(id, length, max, ini, fin);
-		ini.addSale(r);
-		fin.addEntra(r);
-		map.addRoad(r);
+	public void execute(RoadMap map) throws SimulatorException {
+		try {
+			Junction ini = map.getJunction(sr);
+			Junction fin = map.getJunction(dest);
+			Road r = new Road(id, length, max, ini, fin);
+			ini.addSale(r);
+			fin.addEntra(r);
+			map.addRoad(r);
+		}
+		catch(NullPointerException e) {
+			throw new SimulatorException("Road " + id + ": invalid source/destiny junctions");
+		}
+		catch(IllegalArgumentException e) {
+			throw new SimulatorException("Road " + id + ": id already exists");
+		}
 	}
 	
 }

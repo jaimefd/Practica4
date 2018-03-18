@@ -3,6 +3,7 @@ package es.ucm.fdi.launcher;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.launcher.Main;
 
 public class FullTest {
@@ -14,7 +15,7 @@ public class FullTest {
 		try {
 			Main.test(BASE + "examples/err");
 			fail("Expected an exception while parsing bad ini file");
-		} catch (Exception e) {
+		} catch (SimulatorException e) {
 			// Expected exception
 		}
 	}

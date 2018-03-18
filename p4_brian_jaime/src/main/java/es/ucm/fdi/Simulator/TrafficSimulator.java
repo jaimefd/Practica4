@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.Events.Event;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
@@ -39,7 +40,7 @@ public class TrafficSimulator {
 	*/
 	public void insertaEvento(Event e) {
 		if (e.getTime() < contadorTiempo)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid time");
 		eventos.putValue(e.getTime(), e);
 	}
 	
@@ -67,8 +68,9 @@ public class TrafficSimulator {
 	 * @param pasosSimulacion : Tiempo que dura la simulación
 	 * @param o : Flujo de salida
 	 * @throws IOException 
+	 * @throws SimulatorException 
 	*/
-	public void execute(int pasosSimulacion, OutputStream o) throws IOException {
+	public void execute(int pasosSimulacion, OutputStream o) throws IOException, SimulatorException {
 		int limiteTiempo = this.contadorTiempo + pasosSimulacion - 1;
 		while (this.contadorTiempo <= limiteTiempo) {
 			List<Event> eventActuales = eventos.get(contadorTiempo);

@@ -114,6 +114,7 @@ public class RoadMap {
 	 * @param v: Vehículo
 	*/	
 	public void addVehicle(Vehicle v) {
+		if (simObjects.containsKey(v.getID())) throw new IllegalArgumentException();
 		simObjects.put(v.getID(), v);
 		vehicles.add(v);
 	}
@@ -123,6 +124,7 @@ public class RoadMap {
 	 * @param r: Carretera
 	*/
 	public void addRoad(Road r) {
+		if (simObjects.containsKey(r.getID())) throw new IllegalArgumentException();
 		simObjects.put(r.getID(), r);
 		roads.add(r);
 	}
@@ -132,6 +134,7 @@ public class RoadMap {
 	 * @param c: Cruce
 	*/
 	public void addJunction(Junction j) {
+		if (simObjects.containsKey(j.getID())) throw new IllegalArgumentException();
 		simObjects.put(j.getID(), j);
 		junctions.add(j);
 	}

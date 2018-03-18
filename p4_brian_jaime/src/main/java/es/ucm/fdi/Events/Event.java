@@ -1,5 +1,6 @@
 package es.ucm.fdi.Events;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.Simulator.RoadMap;
 
 /** 
@@ -28,7 +29,8 @@ public abstract class Event {
 	/** 
 	 * Método abstracto que ejecuta el evento
 	 * @param map El mapa de carreteras e intersecciones.
+	 * @throws SimulatorException 
 	*/
-	public abstract void execute(RoadMap map);
+	public abstract void execute(RoadMap map) throws SimulatorException;
 	
 }

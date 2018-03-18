@@ -1,5 +1,6 @@
 package es.ucm.fdi.Events;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.AdvancedObjects.RoundRobin;
 import es.ucm.fdi.Simulator.RoadMap;
 
@@ -29,10 +30,16 @@ public class NewRoundRobinEvent extends NewJunctionEvent{
 	/** 
 	 * Método que ejecuta el evento de creación de un nuevo cruce circular
 	 * @param map El mapa de carreteras e intersecciones.
+	 * @throws SimulatorException 
 	*/
 
-	public void execute(RoadMap map) {
-		map.addJunction(new RoundRobin(id, max_time_slice, min_time_slice));
+	public void execute(RoadMap map) throws SimulatorException {
+		try{
+			map.addJunction(new RoundRobin(id, max_time_slice, min_time_slice));
+		}
+		catch(IllegalArgumentException e) {
+			throw new SimulatorException("RoundRobin " + id + ": id already exists");
+		}
 	}
 
 }

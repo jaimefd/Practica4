@@ -18,6 +18,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import Exceptions.SimulatorException;
 import es.ucm.fdi.Control.Controller;
 import es.ucm.fdi.Simulator.TrafficSimulator;
 import es.ucm.fdi.ini.Ini;
@@ -115,7 +116,7 @@ public class Main {
 	 * 
 	 * @throws IOException
 	 */
-	static void test(String path) throws IOException {
+	static void test(String path) throws IOException, SimulatorException {
 
 		File dir = new File(path);
 
@@ -136,7 +137,7 @@ public class Main {
 
 	}
 
-	private static void test(String inFile, String outFile, String expectedOutFile, int timeLimit) throws IOException {
+	private static void test(String inFile, String outFile, String expectedOutFile, int timeLimit) throws IOException, SimulatorException {
 		_outFile = outFile;
 		_inFile = inFile;
 		_timeLimit = timeLimit;
@@ -151,7 +152,7 @@ public class Main {
 	 * 
 	 * @throws IOException
 	 */
-	private static void startBatchMode() throws IOException {
+	private static void startBatchMode() throws IOException, SimulatorException {
 		OutputStream out;
 		if(_outFile != null) out = new FileOutputStream(_outFile);
 		else out = System.out;
@@ -163,7 +164,15 @@ public class Main {
 
 	private static void start(String[] args) throws IOException {
 		parseArgs(args);
-		startBatchMode();
+		try {
+			startBatchMode();
+		}
+		catch(SimulatorException e) {
+			System.err.println(e.getMessage());
+		}
+		catch(IOException e) {
+			System.err.println("OuputStream error");
+		}
 	}
 
 	public static void main(String[] args) throws IOException, InvocationTargetException, InterruptedException {

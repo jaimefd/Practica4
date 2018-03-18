@@ -1,5 +1,6 @@
 package es.ucm.fdi.Events;
 
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.Simulator.RoadMap;
 
 /** 
@@ -27,11 +28,17 @@ public class VehicleFaultyEvent extends Event{
 	/** 
 	 * Método que ejecuta el evento de avería de vehículos.
 	 * @param map El mapa de carreteras e intersecciones.
+	 * @throws SimulatorException 
 	*/
 
-	public void execute(RoadMap map) {
+	public void execute(RoadMap map) throws SimulatorException {
+		try {
 		for (String v : vehicles)
 			map.getVehicle(v).setTiempoAveria(duration);
+		}
+		catch(NullPointerException e) {
+			throw new SimulatorException("VehicleFaulty " + ": invalid vehicles");
+		}
 	}
 	
 }

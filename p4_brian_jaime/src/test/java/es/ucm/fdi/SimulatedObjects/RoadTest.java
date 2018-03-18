@@ -9,17 +9,18 @@ import static org.junit.Assert.*;
 
 public class RoadTest {
 	List<Junction> itinerario = new ArrayList<>();
+	Junction j1 = new Junction("j1");
+	Junction j2 = new Junction("j2");
+	Junction j3 = new Junction("j3");
+	Road r1 = new Road("r1", 15, 20, j1, j2);
+	Road r2 = new Road("r2", 20, 20, j1, j2);
 
 	@Test
 	public void roadTest() {
-		Junction j1 = new Junction("j1");
-		Junction j2 = new Junction("j2");
-		Junction j3 = new Junction("j3");
+		
 		itinerario.add(j1);
 		itinerario.add(j2);
 		itinerario.add(j3);
-		Road r1 = new Road("r1", 15, 20, itinerario.get(0), itinerario.get(1));
-		Road r2 = new Road("r2", 20, 20, itinerario.get(1), itinerario.get(2));
 		Vehicle v1 = new Vehicle("v1", 12, itinerario);
 		Vehicle v2 = new Vehicle("v2", 15, itinerario);
 		v1.moverASiguienteCarretera(r1);

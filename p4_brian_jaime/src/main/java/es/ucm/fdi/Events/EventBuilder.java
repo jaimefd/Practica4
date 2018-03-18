@@ -44,5 +44,4 @@ public interface EventBuilder {
 	 * @return El array de strings.
 	*/
 	
-	public String[] parseIdList(IniSection sec, String key);
 }

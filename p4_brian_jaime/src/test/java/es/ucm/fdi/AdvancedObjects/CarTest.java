@@ -14,7 +14,7 @@ public class CarTest {
 	List<Junction> itinerario = new ArrayList<>();
 	
 	@Test
-	public void averiaTrueTest() {
+	public void testExecute() {
 		itinerario.add(new Junction("j1"));
 		itinerario.add(new Junction("j2"));
 		Road r1 = new Road("r1", 15, 20, itinerario.get(0), itinerario.get(1));

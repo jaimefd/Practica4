@@ -39,6 +39,15 @@ public class RoundRobin extends Junction{
 		super.addEntra(r);
 	}
 	
+	/** 
+	 * Devuelve el intervalo de tiempo de una carretera entrante.
+	 * @param i : Índice de la carretera
+	 * @return El intervalo de tiempo de la carretera entrante i
+	*/
+	public int getIntervaloDeTiempo(int i) {
+		return intervaloDeTiempo.get(i);
+	}
+	
 	/**
 	 * Informe de RoundRobin
 	 * @param out : Mapa con los datos de RoundRobin
@@ -85,7 +94,7 @@ public class RoundRobin extends Junction{
 			if (unidadesDeTiempoUsadas == intervaloDeTiempo.get(k)) {
 				entrantes.get(k).setSemaforo(false);
 				if (usos == unidadesDeTiempoUsadas) 
-					intervaloDeTiempo.set(k, Math.max((int) intervaloDeTiempo.get(k) - 1, minValorIntervalo));
+					intervaloDeTiempo.set(k, Math.min((int) intervaloDeTiempo.get(k) + 1, maxValorIntervalo));
 				else if (usos == 0) 
 					intervaloDeTiempo.set(k, Math.max((int) intervaloDeTiempo.get(k) - 1, minValorIntervalo));
 				unidadesDeTiempoUsadas = 0;

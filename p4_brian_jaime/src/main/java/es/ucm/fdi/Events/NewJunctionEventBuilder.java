@@ -17,6 +17,7 @@ public class NewJunctionEventBuilder implements EventBuilder {
 	 * @return El evento creado.
 	*/
 	public Event parse(IniSection sec) {
+		if (!sec.getTag().equals("new_junction")) return null;
 		String[] parJ = {"time", "id"};
 		if (!sec.getKeys().containsAll(Arrays.asList(parJ))) 
 			throw new IllegalArgumentException();

@@ -3,6 +3,7 @@ package es.ucm.fdi.Events;
 import org.junit.Assert;
 import org.junit.Test;
 
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
@@ -33,7 +34,12 @@ public class NewCarEventTest {
 		String[] s = {"j3", "j5", "j6"};
 		NewCarEvent v = new NewCarEvent(3, "v77", 20, s, 12, 0.8, 5, 589);
 		
-		v.execute(m);
+		try {
+			v.execute(m);
+		} catch (SimulatorException e) {
+			Assert.fail();
+			System.out.println("Fallo en la ejecución");
+		}
 		
 		Vehicle x = m.getVehicles().get(m.getVehicles().size() - 1);
 		Assert.assertEquals("El ID del vehiculo creado es correcto", "v77", x.getID());

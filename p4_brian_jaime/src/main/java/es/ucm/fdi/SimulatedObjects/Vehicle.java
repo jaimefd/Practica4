@@ -57,11 +57,27 @@ public class Vehicle extends SimObject {
 	}
 	
 	/** 
+	 * Método set para localizacion.
+	 * @param n : Nueva posición del vehículo
+	*/
+	public void setPos(int n) {
+		localizacion = n;
+	}
+	
+	/** 
 	 * Método get para roadActual.
 	 * @return Carretera actual
 	*/
 	public Road getCarretera(){
 		return roadActual;
+	}
+	
+	/** 
+	 * Método set para localizacion.
+	 * @param r : Nueva carretera
+	*/
+	public void setCarretera(Road r) {
+		roadActual = r;		
 	}
 	
 	/** 

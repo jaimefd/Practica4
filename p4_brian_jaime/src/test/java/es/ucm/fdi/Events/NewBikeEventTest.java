@@ -3,6 +3,7 @@ package es.ucm.fdi.Events;
 import org.junit.Assert;
 import org.junit.Test;
 
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Road;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
@@ -17,8 +18,7 @@ public class NewBikeEventTest {
 	
 	/**
 	 * Método que prueba el método execute de NewBikeEvent.
-	 */
-	
+	*/
 	@Test
 	public void testExecute(){
 		RoadMap m = new RoadMap();
@@ -33,7 +33,12 @@ public class NewBikeEventTest {
 		String[] s = {"j3", "j5", "j6"};
 		NewBikeEvent v = new NewBikeEvent(3, "v6", 20, s);
 		
-		v.execute(m);
+		try {
+			v.execute(m);
+		} catch (SimulatorException e) {
+			Assert.fail();
+			System.out.println("Fallo en la ejecución");
+		}
 		
 		Vehicle x = m.getVehicles().get(m.getVehicles().size() - 1);
 		Assert.assertEquals("El ID de la bici creada es correcto", "v6", x.getID());

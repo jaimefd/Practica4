@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class LaneTest {
 
 	@Test
-	public void averiasCarrilesTest() {
+	public void testExecute() {
 		List<Junction> itinerario = new ArrayList<>();
 		itinerario.add(new Junction("j1"));
 		itinerario.add(new Junction("j2"));

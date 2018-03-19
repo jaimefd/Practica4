@@ -17,6 +17,7 @@ public class NewVehicleEventBuilder implements EventBuilder{
 	 * @return El evento creado.
 	*/
 	public Event parse(IniSection sec) {
+		if (!sec.getTag().equals("new_vehicle")) return null;
 		String[] parV = {"time", "id", "max_speed", "itinerary"};
 		if (!sec.getKeys().containsAll(Arrays.asList(parV))) 
 			throw new IllegalArgumentException();

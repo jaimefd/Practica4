@@ -7,6 +7,11 @@ import org.junit.Test;
 import java.util.List;
 import static org.junit.Assert.*;
 
+/** 
+ * La clase RoadTest se encarga de probar que Road funciona correctamente.
+ * @author Jaime Fernández y Brian Leiva
+*/
+
 public class RoadTest {
 	List<Junction> itinerario = new ArrayList<>();
 	Junction j1 = new Junction("j1");
@@ -15,8 +20,36 @@ public class RoadTest {
 	Road r1 = new Road("r1", 15, 20, j1, j2);
 	Road r2 = new Road("r2", 20, 20, j1, j2);
 
+	/**
+	 * Método que prueba la entrada y salida de vehículos de Road.
+	*/
 	@Test
-	public void roadTest() {
+	public void vehiculosTest() {
+		itinerario.add(j1);
+		itinerario.add(j2);
+		itinerario.add(j3);
+		Vehicle v1 = new Vehicle("v1", 20, itinerario);
+		Vehicle v2 = new Vehicle("v2", 15, itinerario);
+		v1.setCarretera(r1);
+		v2.setCarretera(r1);
+		r1.entraVehiculo(v1);
+		r1.entraVehiculo(v2);
+		assertTrue("Se introdocen los vehículos en la posición 0", r1.vehiculos.get(0).size() == 2);
+
+		r1.saleVehiculo(v1);
+		assertTrue("No debería salir ningún vehículo (siguen en la posición 0)", r1.vehiculos.get(0).size() == 2);
+
+		r1.avanza();
+		r1.avanza();
+		r1.saleVehiculo(v1);
+		assertTrue("v1 debe haber salido de r1", r1.vehiculos.sizeOfValues() == 1);
+	}
+	
+	/**
+	 * Método que prueba el método avanza de Road.
+	*/
+	@Test
+	public void avanzaTest() {
 		
 		itinerario.add(j1);
 		itinerario.add(j2);

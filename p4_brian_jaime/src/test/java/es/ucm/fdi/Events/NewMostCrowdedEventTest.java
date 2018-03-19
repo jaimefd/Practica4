@@ -3,6 +3,7 @@ package es.ucm.fdi.Events;
 import org.junit.Assert;
 import org.junit.Test;
 
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.Simulator.RoadMap;
 
@@ -22,7 +23,12 @@ public class NewMostCrowdedEventTest {
 		RoadMap m = new RoadMap();
 		NewMostCrowdedEvent j = new NewMostCrowdedEvent(3, "j9");
 		
-		j.execute(m);
+		try {
+			j.execute(m);
+		} catch (SimulatorException e) {
+			Assert.fail();
+			System.out.println("Fallo en la ejecución");
+		}
 		
 		Junction x = m.getJunctions().get(m.getJunctions().size() - 1);
 		Assert.assertEquals("El ID del cruce creado es correcto", "j9", x.getID());

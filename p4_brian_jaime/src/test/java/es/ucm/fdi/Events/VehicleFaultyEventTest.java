@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import es.ucm.fdi.Exceptions.SimulatorException;
 import es.ucm.fdi.SimulatedObjects.Junction;
 import es.ucm.fdi.SimulatedObjects.Vehicle;
 import es.ucm.fdi.Simulator.RoadMap;
@@ -36,7 +37,12 @@ public class VehicleFaultyEventTest {
 		m.addVehicle(c);
 		VehicleFaultyEvent e = new VehicleFaultyEvent(3, s, 4);
 		
-		e.execute(m);
+		try {
+			e.execute(m);
+		} catch (SimulatorException ex) {
+			Assert.fail();
+			System.out.println("Fallo en la ejecución");
+		}
 		
 		for (String v : s){
 			Assert.assertTrue("Los vehiculos han sido averiados", m.getVehicle(v).getAveria());

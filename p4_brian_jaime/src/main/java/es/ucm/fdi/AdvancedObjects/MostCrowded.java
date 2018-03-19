@@ -27,6 +27,14 @@ public class MostCrowded extends Junction {
 	}
 	
 	/** 
+	 * Método get para intervaloDeTiempo.
+	 * @return El intervalo de tiempo actual
+	*/
+	public int getIntervaloDeTiempo() {
+		return intervaloDeTiempo;
+	}
+	
+	/** 
 	 * Informe de MostCrowded.
 	 * @param out : Mapa para salida de datos
 	*/

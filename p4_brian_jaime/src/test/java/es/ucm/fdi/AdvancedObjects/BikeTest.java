@@ -14,14 +14,14 @@ public class BikeTest {
 	Bike b1 = new Bike("b1", 15, itinerario);
 	
 	@Test
-	public void averiaFalseTest() {
+	public void faultyFalseTest() {
 		b1.setVelocidadActual(5);
 		b1.setTiempoAveria(1);
 		assertFalse("El vehículo no debería haberse averiado", b1.getAveria());
 	}	
 	
 	@Test
-	public void averiaTrueTest() {
+	public void faultyTrueTest() {
 		b1.setVelocidadActual(10);
 		b1.setTiempoAveria(1);
 		assertTrue("El vehículo debería haberse averiado", b1.getAveria());

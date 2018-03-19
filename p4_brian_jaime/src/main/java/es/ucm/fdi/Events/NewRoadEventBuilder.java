@@ -17,6 +17,7 @@ public class NewRoadEventBuilder implements EventBuilder {
 	 * @return El evento creado.
 	*/
 	public Event parse(IniSection sec) {
+		if (!sec.getTag().equals("new_road")) return null;
 		String[] parR = {"time", "id", "src", "dest", "max_speed", "length"};
 		if (!sec.getKeys().containsAll(Arrays.asList(parR))) 
 			throw new IllegalArgumentException();
